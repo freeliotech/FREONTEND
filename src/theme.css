@@ -1,0 +1,67 @@
+body {
+  background: #030014;
+  color: #e2e8f0;
+  font-family: "Inter", sans-serif;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  background: #0b0f2a;
+  border: 1px solid #3b3f68;
+  color: #fff;
+  border-radius: 10px;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.input:focus {
+  border-color: #22d3ee;
+  box-shadow: 0 0 10px #22d3ee;
+}
+
+.btn {
+  background: linear-gradient(90deg, #3b82f6, #22d3ee);
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  box-shadow: 0 0 18px #22d3ee;
+}
+
+.card {
+  background: #0b0f28;
+  border: 1px solid #3b3f68;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 0 20px rgba(34,211,238,0.2);
+}
+
+.table {
+  width: 100%;
+  color: white;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: #151b3a;
+  padding: 12px;
+  border-bottom: 2px solid #22d3ee;
+}
+
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid #1f2547;
+}
+
+.badge {
+  background: #22d3ee;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}

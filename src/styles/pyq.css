@@ -1,0 +1,61 @@
+.pyq-section {
+  background: #020617;
+  min-height: 100vh;
+  padding: 40px;
+  color: white;
+}
+
+.pyq-title {
+  text-align: center;
+  font-size: 36px;
+  color: cyan;
+  margin-bottom: 25px;
+  margin-top: 50px;
+}
+
+.pyq-filter-box {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.pyq-select {
+  padding: 10px;
+  background: #000;
+  color: cyan;
+  border: 1px solid cyan;
+  border-radius: 8px;
+}
+
+.pyq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.pyq-card {
+  background: #0f172a;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid cyan;
+  text-align: center;
+}
+
+.pyq-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.pyq-btn {
+  display: block;
+  padding: 10px;
+  background: cyan;
+  color: black;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 10px;
+}
