@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
+    "@tsparticles/engine": "^3.9.1",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.9.1",
     "animejs": "^4.2.2",
     "aos": "^2.3.4",
     "axios": "^1.13.2",
