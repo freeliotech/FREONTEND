@@ -153,7 +153,7 @@ export default function Contact({ user }) {
               icon={<FaWhatsapp />}
               label="WhatsApp Support"
               value="+91 6205631578"
-              link="https://wa.me/916205631578"
+              link="https://wa.me/918292928328"
             />
 
           </div>
@@ -249,7 +249,7 @@ function InfoCard({ icon, label, value, link }) {
     (value.includes("@")
       ? `mailto:${value}`
       : value.includes("+")
-      ? `https://wa.me/916205631578`
+      ? `https://wa.me/918292928328`
       : "#");
 
   return (

@@ -273,7 +273,7 @@ export default function Nav() {
                 ["App Development", "/services/app", <FaMobileAlt />],
                  ["Web Development", "/services/web", <FaLaptopCode />],
                   ["Logo Design", "/services/logoDesign", <FaPalette />],
-                ["BEU Guide", "/beu/home", <FaBookReader />],
+                ["BEU Guide", "/comingsoon", <FaBookReader />],
                 ["Contact", "/contact",<FcOnlineSupport />],
               
               ].map(([label, path, icon]) => (
