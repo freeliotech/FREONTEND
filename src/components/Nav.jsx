@@ -32,7 +32,7 @@ import { FaBookReader } from "react-icons/fa"; // ✅ CORRECT
 import { MdLibraryBooks } from "react-icons/md";
 import { FiLogOut, FiLogIn } from "react-icons/fi";
 
-import logo from "../assets/logo-f.png";
+import logo from "../assets/logo.png";
 
 /* ================= BASE URL ================= */
 const BASE_URL = "https://backend-production-7a212.up.railway.app/api/auth";
@@ -99,15 +99,38 @@ export default function Nav() {
       >
         <div className="max-w-[1600px] mx-auto px-6 flex items-center justify-between">
 
-          {/* LOGO */}
-          <Link to="/" className="flex items-center gap-2">
-            <motion.img
-              src={logo}
-              className="h-12"
-              whileHover={{ scale: 1.05 }}
-            />
-          </Link>
 
+    <Link to="/" className="flex items-center gap-3">
+
+
+{/* LOGO IMAGE */}
+<motion.img
+  src={logo}
+  alt="TTIC Hub Logo"
+  className="h-14 w-14 object-contain"
+  whileHover={{ scale: 1.08 }}
+  transition={{ duration: 0.3 }}
+/>
+
+{/* TEXT CONTENT (Hidden on mobile) */}
+<div className="hidden md:flex flex-col leading-tight">
+
+  {/* MAIN NAME */}
+<h1 className="text-3xl md:text-4xl font-bold 
+bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-600 
+bg-clip-text text-transparent 
+
+text-3d">
+  TTICHUB
+</h1>
+
+  {/* TAGLINE */}
+  <p className="text-[7px] text-white">
+    Tech Training, Innovation & Certification Hub
+  </p>
+
+</div>
+    </Link>
           {/* ================= DESKTOP MENU ================= */}
           <div className="hidden md:flex items-center gap-10 ml-auto uppercase">
             <NavLink to="/courses" className={navLink}>Courses</NavLink>
