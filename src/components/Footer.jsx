@@ -32,11 +32,11 @@ const fadeUp = {
 
 export default function Footer() {
   const socials = [
-    { Icon: FaFacebookF, link: "https://facebook.com", color: "hover:text-blue-500" },
-    { Icon: FaInstagram, link: "https://instagram.com", color: "hover:text-pink-500" },
-    { Icon: FaYoutube, link: "https://youtube.com", color: "hover:text-red-500" },
-    { Icon: FaLinkedinIn, link: "https://linkedin.com", color: "hover:text-sky-500" },
-    { Icon: FaTelegramPlane, link: "https://t.me", color: "hover:text-cyan-400" },
+    { Icon: FaFacebookF, link: "https://www.facebook.com/share/184mrVvWrq/", color: "hover:text-blue-500" },
+    { Icon: FaInstagram, link: "https://www.instagram.com/ttichub?utm_source=qr&igsh=NTY1ZmEwbHBiaTg1", color: "hover:text-pink-500" },
+    { Icon: FaYoutube, link: "https://youtube.com/@ttichub?si=WS_hLLNNfn5xh4Wx", color: "hover:text-red-500" },
+    { Icon: FaLinkedinIn, link: "https://www.linkedin.com/company/freeliotech/", color: "hover:text-sky-500" },
+    
   ];
 
   return (
@@ -75,49 +75,71 @@ export default function Footer() {
         {/* GRID */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
 
-          {/* ABOUT */}
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <h3 className="text-white font-bold text-xl mb-4 tracking-wide">
-              FreeLioTech
-            </h3>
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <h1 className="text-3xl md:text-4xl font-extrabold 
+            bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-600 
+            bg-clip-text text-transparent 
+            drop-shadow-[0_0_10px_rgba(59,130,246,0.6)]">
+              TTICHUB
+            </h1>
 
-            <p className="text-sm text-gray-400 leading-relaxed">
-              A next-generation learning & internship platform delivering
-              industry-ready skills and verified certifications.
+            <p className="mt-3 text-sm leading-relaxed">
+              <span className="text-cyan-400 font-semibold text-[12px]">
+                Tech Training, Innovation & Certification Hub
+              </span>
+              <br />
+              <span className="text-gray-400 text-[9px]">
+               Empowering students with practical skills, innovation, and industry-ready certification through real-world training and internships.
+              </span>
             </p>
           </motion.div>
+{/* CONTACT */}
+<motion.div variants={fadeUp} initial="hidden" whileInView="visible" custom={1}>
+  <h3 className="text-white font-semibold text-lg mb-4">Contact</h3>
 
-          {/* CONTACT */}
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" custom={1}>
-            <h3 className="text-white font-semibold text-lg mb-4">Contact</h3>
+  <ul className="space-y-4 text-sm">
 
-            <ul className="space-y-3 text-sm">
+    {/* LOCATION */}
+    <li className="flex gap-3 hover:text-white transition">
+      <FaMapMarkerAlt className="text-cyan-400 mt-1" />
+      <a
+        href="https://www.google.com/maps?q=Bhagalpur,Bihar,India"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:underline"
+      >
+        Bhagalpur & Patna, Bihar
+      </a>
+    </li>
 
-              <li className="flex gap-3">
-                <FaMapMarkerAlt className="text-cyan-400 mt-1" />
+    
 
-                <a
-                  href="https://www.google.com/maps?q=Patna,Bihar,India"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition"
-                >
-                  J. P. Nagar, Bengaluru, Karnataka 560078
-                </a>
-              </li>
+    {/* WHATSAPP */}
+    <li className="flex gap-3 hover:text-white transition">
+      <FaPhoneAlt className="text-green-400" />
+      <a
+        href="https://wa.me/918292928328"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:underline"
+      >
+        WhatsApp Support
+      </a>
+    </li>
 
-              <li className="flex gap-3">
-                <FaPhoneAlt className="text-cyan-400" />
-                +91 8292928328
-              </li>
+    {/* EMAIL */}
+    <li className="flex gap-3 break-all hover:text-white transition">
+      <FaEnvelope className="text-cyan-400" />
+      <a
+        href="mailto:admin@ttichub.co.in"
+        className="hover:underline"
+      >
+        admin@ttichub.co.in
+      </a>
+    </li>
 
-              <li className="flex gap-3 break-all">
-                <FaEnvelope className="text-cyan-400" />
-                office@freeliotech.in
-              </li>
-
-            </ul>
-          </motion.div>
+  </ul>
+</motion.div>
 
           {/* LEGAL */}
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" custom={2}>
@@ -167,36 +189,13 @@ export default function Footer() {
 
         {/* DIVIDER */}
         <div className="mt-12 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
-        {/* MOVING DEVELOPER */}
-        <div className="overflow-hidden mt-4">
-          <Link to="/developer">
-            <motion.div
-              animate={{ x: ["-100%", "100%"] }}
-              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-              className="flex items-center gap-3 whitespace-nowrap cursor-pointer"
-            >
-              <img
-                src={sanuj}
-                alt="developer"
-                className="w-8 h-8 rounded-full border border-cyan-400"
-              />
-
-              <span className="text-cyan-400 text-sm font-medium hover:text-white transition">
-                SANUJ KUMAR
-              </span>
-
-            </motion.div>
-          </Link>
-        </div>
-
         {/* COPYRIGHT */}
         <div className="mt-6 text-center text-xs text-gray-500 flex justify-center">
           <span className="flex items-center gap-1">
             © {new Date().getFullYear()}
 
             <span className="text-white flex items-center gap-1">
-              FreeLioTech
+              Ttichub
 
               <motion.span
                 animate={{ scale: [1, 1.3, 1] }}
