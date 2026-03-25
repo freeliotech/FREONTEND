@@ -3,27 +3,6 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { ApiContext } from "../config/Api";
 
-/* ===== Motion Variants ===== */
-
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-};
-
-const card = {
-  hidden: { opacity: 0, y: 60, scale: 0.9 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.6 },
-  },
-};
-
 export default function MiniGallery() {
 
   const [gallery, setGallery] = useState([]);
@@ -31,128 +10,94 @@ export default function MiniGallery() {
   const [preview, setPreview] = useState(null);
 
   useEffect(() => {
-
     axios
       .get(`${ApiContext}/gallery`)
       .then((res) => {
         setGallery(res.data);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
-
+      .catch(() => setLoading(false));
   }, []);
 
   return (
-    <section className="relative py-28 px-6 bg-transparent overflow-hidden text-white font-Poppins">
+    <section className="relative py-20 px-4 bg-black text-white overflow-hidden">
 
-      {/* BACKGROUND */}
+      {/* BACKGROUND GLOW */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-cyan-500/10 blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-purple-500/10 blur-[120px]" />
 
-      <div className="absolute inset-0 bg-transparent -to-b from-[#020617] via-[#050b16] to-black"></div>
-
-      {/* GLOW */}
-
-      <motion.div
-        animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ duration: 8, repeat: Infinity }}
-        className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/20 blur-[180px]"
-      />
-
-      <motion.div
-        animate={{ scale: [1, 1.4, 1], opacity: [0.2, 0.5, 0.2] }}
-        transition={{ duration: 10, repeat: Infinity }}
-        className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-purple-500/20 blur-[200px]"
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto text-center">
+      <div className="relative z-10 max-w-7xl mx-auto">
 
         {/* TITLE */}
-
-        <motion.h2
-          initial={{ opacity: 0, y: -40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-16"
-        >
-          <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">
             Our Gallery
           </span>
-        </motion.h2>
+        </h2>
 
         {/* LOADING */}
-
         {loading && (
-          <div className="text-cyan-400 text-lg animate-pulse">
+          <div className="text-center text-cyan-400 animate-pulse">
             Loading Gallery...
           </div>
         )}
 
-        {/* GRID */}
+        {/* 🔥 AUTO SLIDER (RIGHT → LEFT) */}
+        <div className="overflow-hidden">
+          <motion.div
+            className="flex gap-6"
+            animate={{ x: ["0%", "-100%"] }}
+            transition={{
+              ease: "linear",
+              duration: 25,
+              repeat: Infinity,
+            }}
+          >
+            {[...gallery, ...gallery].map((img, i) => (
+              <div
+                key={i}
+                onClick={() => setPreview(img.src)}
+                className="min-w-[250px] sm:min-w-[280px] md:min-w-[300px] 
+                group relative cursor-pointer rounded-xl overflow-hidden
+                border border-white/10 bg-white/5 backdrop-blur
+                hover:border-cyan-400
+                hover:shadow-[0_0_25px_rgba(0,255,255,0.3)]
+                transition duration-300"
+              >
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
-        >
+                <img
+                  src={img.src}
+                  alt={img.title}
+                  className="w-full h-52 object-cover transition duration-500 group-hover:scale-110"
+                />
 
-          {gallery.map((img, i) => (
-
-            <motion.div
-              key={i}
-              variants={card}
-              whileHover={{ scale: 1.05 }}
-              onClick={() => setPreview(img.src)}
-              className="group relative cursor-pointer rounded-xl overflow-hidden
-              border border-white/10 bg-white/5 backdrop-blur
-              hover:border-cyan-400
-              hover:shadow-[0_0_35px_rgba(0,255,255,0.4)]
-              transition duration-300"
-            >
-
-              <img
-                src={img.src}
-                alt={img.title}
-                className="w-full h-56 object-cover transition duration-500 group-hover:scale-110"
-              />
-
-              {/* OVERLAY */}
-
-              <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
-
-                <p className="text-cyan-400 font-semibold text-lg">
-                  {img.title}
-                </p>
+                {/* OVERLAY */}
+                <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+                  <p className="text-cyan-400 font-semibold text-lg">
+                    {img.title}
+                  </p>
+                </div>
 
               </div>
-
-            </motion.div>
-
-          ))}
-
-        </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
       </div>
 
-      {/* IMAGE PREVIEW MODAL */}
-
+      {/* PREVIEW MODAL */}
       {preview && (
-
         <div
           onClick={() => setPreview(null)}
           className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
         >
-
           <motion.img
             src={preview}
-            initial={{ scale: 0.7 }}
-            animate={{ scale: 1 }}
-            className="max-h-[80vh] rounded-xl"
+            initial={{ scale: 0.7, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="max-h-[80vh] rounded-xl shadow-lg"
           />
-
         </div>
-
       )}
 
     </section>
