@@ -126,7 +126,7 @@ text-3d">
 
   {/* TAGLINE */}
   <p className="text-[7px] text-white">
-    Tech Training, Innovation & Certification Hub
+   <i> Tech Training, Innovation & Certification Hub</i>
   </p>
 
 </div>
@@ -228,94 +228,136 @@ text-3d">
         </div>
       </motion.nav>
 
-      {/* ================= MOBILE MENU ================= */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 90 }}
-            className="fixed top-0 right-0 h-full w-80 bg-[#0a1220]/95
-                       backdrop-blur-2xl border-l border-cyan-500/30
-                       z-[999] p-6 uppercase"
-          >
-            <button onClick={() => setOpen(false)} className="absolute top-4 right-4 text-cyan-300">
-              <X size={30} />
-            </button>
+   {/* ================= MOBILE MENU ================= */}
+<AnimatePresence>
+  {open && (
+    <>
+      {/* 🔥 OVERLAY */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.7 }}
+        exit={{ opacity: 0 }}
+        onClick={() => setOpen(false)}
+        className="fixed inset-0 bg-black backdrop-blur-md z-[998]"
+      />
 
-            {/* MOBILE PROFILE */}
-            {user ? (
-              <div className="mt-10 flex flex-col items-center gap-4
-                              border-b border-cyan-500/20 pb-6">
-                <img
-                  src={`${UPLOADS_URL}/${user.photo}`}
-                  className="h-20 w-20 rounded-full object-cover
-                             border-2 border-cyan-400 shadow-[0_0_20px_cyan]"
-                />
-                <h2 className="text-lg font-semibold text-cyan-300">{user.name}</h2>
+      {/* 🚀 LEFT SIDE MENU */}
+      <motion.div
+        initial={{ x: "-120%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "-120%" }}
+        transition={{
+          type: "tween",
+          ease: [0.25, 0.8, 0.25, 1],
+          duration: 0.5,
+        }}
+        className="fixed top-0 left-0 h-full w-[85%] max-w-sm
+                   bg-[#05070f]/95 backdrop-blur-xl
+                   border-r border-cyan-500/10
+                   z-[999] p-6 flex flex-col"
+      >
+        {/* ❌ CLOSE */}
+        <button
+          onClick={() => setOpen(false)}
+          className="absolute top-5 right-5 text-cyan-400"
+        >
+          <X size={26} />
+        </button>
 
-                <Link
-                  to={dashboardRoute}
-                  onClick={() => setOpen(false)}
-                  className="w-full text-center px-4 py-2 rounded-xl
-                             bg-cyan-500/20 text-cyan-300"
-                >
-                  Dashboard
-                </Link>
+        {/* 🔥 SCROLL AREA */}
+        <div className="flex-1 overflow-y-auto pr-2">
+          
+          {/* PROFILE */}
+          {user ? (
+            <div className="mt-14 flex flex-col items-center gap-4 border-b border-cyan-500/10 pb-6">
+              <img
+                src={`${UPLOADS_URL}/${user.photo}`}
+                className="h-20 w-20 rounded-full border border-cyan-400/40"
+              />
+              <h2 className="text-cyan-300">{user.name}</h2>
 
-                <button
-                  onClick={logout}
-                  className="w-full px-4 py-2 rounded-xl
-                             bg-red-500/10 text-red-400
-                             flex items-center justify-center gap-2"
-                >
-                  <FiLogOut /> Logout
-                </button>
-              </div>
-            ) : (
-              <div className="mt-10 flex justify-center pb-6">
-                <Link
-                  to="/login"
-                  onClick={() => setOpen(false)}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r
-                             from-cyan-400 to-blue-500 text-black
-                             font-semibold flex items-center gap-2"
-                >
-                  <FiLogIn /> Login
-                </Link>
-              </div>
-            )}
-
-            {/* MOBILE LINKS */}
-            <div className="mt-8 flex flex-col gap-3 text-lg">
-              {[
-                ["Courses", "/courses", <FcGraduationCap />],
-                ["Internship", "/internship", <FcBusiness />],
-               
-                ["App Development", "/services/app", <FaMobileAlt />],
-                 ["Web Development", "/services/web", <FaLaptopCode />],
-                  ["Logo Design", "/services/logoDesign", <FaPalette />],
-                ["BEU Guide", "/comingsoon", <FaBookReader />],
-                ["Contact", "/contact",<FcOnlineSupport />],
-              
-              ].map(([label, path, icon]) => (
-                <Link
-                  key={label}
-                  to={path}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl
-                             text-white/90 hover:bg-cyan-500/20
-                             hover:text-cyan-300 transition"
-                >
-                  <span className="text-cyan-400">{icon}</span>
-                  {label}
-                </Link>
-              ))}
+              <Link
+                to={dashboardRoute}
+                onClick={() => setOpen(false)}
+                className="w-full text-center py-2 rounded-xl
+                           bg-cyan-500/10 text-cyan-300"
+              >
+                Dashboard
+              </Link>
             </div>
-          </motion.div>
+          ) : (
+            <div className="mt-14 flex justify-center pb-6">
+              <Link
+                to="/login"
+                onClick={() => setOpen(false)}
+                className="px-6 py-3 rounded-xl
+                           bg-gradient-to-r from-cyan-400 to-blue-500
+                           text-black font-semibold"
+              >
+                Login
+              </Link>
+            </div>
+          )}
+
+         <div className="mt-8 flex flex-col gap-2">
+  {[
+    ["Courses", "/courses", <FcGraduationCap />],
+    ["Internship", "/internship", <FcBusiness />],
+    ["App Development", "/services/app", <FaMobileAlt />],
+    ["Web Development", "/services/web", <FaLaptopCode />],
+    ["Logo Design", "/services/logoDesign", <FaPalette />],
+    ["BEU Guide", "/comingsoon", <FaBookReader />],
+    ["Contact", "/contact", <FcOnlineSupport />],
+  ].map(([label, path, icon], i) => (
+    <motion.div
+      key={label}
+      initial={{ opacity: 0, x: -30 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: i * 0.05 }}
+    >
+      <Link
+        to={path}
+        onClick={() => setOpen(false)}
+        className="group flex items-center gap-4 px-4 py-3 rounded-xl
+                   text-white/80 transition-all duration-300
+                   hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-blue-500/10
+                   hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.2)]"
+      >
+        {/* ICON */}
+        <span className="text-xl text-cyan-400 group-hover:scale-125 transition duration-300">
+          {icon}
+        </span>
+
+        {/* TEXT */}
+        <span className="tracking-wide">{label}</span>
+
+        {/* RIGHT ARROW (HOVER ONLY) */}
+        <span className="ml-auto opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition">
+          →
+        </span>
+      </Link>
+    </motion.div>
+  ))}
+</div>
+        </div>
+
+        {/* 🔥 FIXED LOGOUT */}
+        {user && (
+          <div className="pt-4 border-t border-cyan-500/10">
+            <button
+              onClick={logout}
+              className="w-full py-3 rounded-xl
+                         bg-red-500/10 text-red-400
+                         hover:bg-red-500/20 transition"
+            >
+              Logout
+            </button>
+          </div>
         )}
-      </AnimatePresence>
+      </motion.div>
     </>
+  )}
+</AnimatePresence>
+ </>
   );
 }

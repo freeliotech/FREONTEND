@@ -31,10 +31,10 @@ export default function InternshipDetailsSection() {
   };
 
   return (
-    <section className="bg-[#04070d] text-white px-6 py-24 relative font-sans">
+    <section className=" text-white px-6 py-24 relative font-sans">
       {/* LIVE STATS */}
 
-      <div className="max-w-6xl mx-auto mb-20">
+      <div className="max-w-6xl mx-auto mb-2">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {[
             ["10,000+", "Students Trained"],
@@ -71,8 +71,13 @@ export default function InternshipDetailsSection() {
         viewport={{ once: true }}
         className="max-w-6xl mx-auto mb-24"
       >
-        <h3 className="text-3xl font-semibold tracking-tight mb-8 text-white">
-          Internship Process
+        <h3 className="
+  text-lg sm:text-xl md:text-2xl lg:text-3xl
+  mb-4 sm:mb-6 md:mb-8
+  text-white
+  italic
+">
+         <i> Internship Process</i>
         </h3>
 
         <div className="space-y-4">
@@ -114,8 +119,13 @@ export default function InternshipDetailsSection() {
       {/* PROJECTS */}
 
       <div className="max-w-6xl mx-auto mb-24">
-        <h3 className="text-3xl font-semibold tracking-tight mb-8">
-          Projects & Learning
+        <h3 className="
+  text-lg sm:text-xl md:text-2xl lg:text-3xl
+  mb-4 sm:mb-6 md:mb-8
+  text-white
+  italic
+">
+         <i> Projects & Learning</i>
         </h3>
 
         <div className="grid sm:grid-cols-2 gap-6">
@@ -202,6 +212,98 @@ export default function InternshipDetailsSection() {
           </motion.button>
         </div>
       </div>
+      {/* ===== DURATION ===== */}
+<div className="max-w-6xl mx-auto mb-0">
+  <h3 className="
+  text-lg sm:text-xl md:text-2xl lg:text-3xl
+  mb-4 sm:mb-6 md:mb-8
+  text-white
+  italic
+">
+    <i>Internship Duration</i>
+  </h3>
+
+  <div className="grid md:grid-cols-3 gap-6">
+    {[
+      {
+        no: "01",
+        days: "30 Days",
+        level: "Beginner",
+        weeks: [
+          "Week 1: Orientation & Basics",
+          "Week 2: Project Setup",
+          "Week 3: Development",
+          "Week 4: Final Submission",
+        ],
+        duration: "4 Weeks",
+      },
+      {
+        no: "02",
+        days: "45 Days",
+        level: "Intermediate",
+        weeks: [
+          "Week 1: Training",
+          "Week 2-4: Development",
+          "Week 5: Review",
+          "Week 6: Final Project",
+        ],
+        duration: "6 Weeks",
+      },
+      {
+        no: "03",
+        days: "60 Days",
+        level: "Advanced",
+        weeks: [
+          "Week 1: Training",
+          "Week 2-4: Core Projects",
+          "Week 5-7: Advanced Work",
+          "Week 8: Final Presentation",
+        ],
+        duration: "8 Weeks",
+      },
+    ].map((item, i) => (
+      <div
+        key={i}
+        className="
+          bg-[#0b1425]/70 backdrop-blur-xl
+          border border-cyan-400/20
+          rounded-xl p-6
+          hover:border-cyan-400/40
+          hover:shadow-[0_0_25px_rgba(0,255,255,0.15)]
+          transition
+        "
+      >
+        {/* NUMBER */}
+        <p className="text-sm text-gray-400 mb-2">{item.no}</p>
+
+        {/* DAYS */}
+        <h2 className="text-2xl font-bold text-cyan-400 mb-2">
+          {item.days}
+        </h2>
+
+        {/* LEVEL BADGE */}
+        <span className="
+          inline-block text-xs px-3 py-1 rounded-full
+          bg-cyan-400/10 text-cyan-400 border border-cyan-400/30 mb-4
+        ">
+          {item.level}
+        </span>
+
+        {/* WEEKS */}
+        <div className="space-y-2 text-sm text-gray-300">
+          {item.weeks.map((w, idx) => (
+            <p key={idx}>{w}</p>
+          ))}
+        </div>
+
+        {/* DURATION */}
+        <div className="mt-6 pt-4 border-t border-white/10 text-sm text-gray-400">
+          ⏱ {item.duration}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
 
       {/* CERTIFICATE MODAL */}
 

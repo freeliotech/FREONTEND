@@ -31,43 +31,40 @@ const services = [
 
 export default function FreeliotechModernSection() {
   return (
-    <section className="relative py-32 px-6 text-white overflow-hidden">
-
-      {/* Background Glow */}
-
-      <div className="absolute top-0 left-0 w-80 h-80" />
-      <div className="absolute bottom-0 right-0 w-96 h-96" />
+    <section className="py-20 px-4 md:px-6 text-white">
 
       <div className="max-w-7xl mx-auto">
 
-        {/* Header */}
+        {/* SERVICES GRID */}
 
-       
-
-        {/* Services Grid */}
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
           {services.map((service, i) => (
 
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -8 }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-white/5 backdrop-blur-lg border border-white/10 p-8 rounded-2xl text-center hover:border-cyan-400 transition"
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              whileHover={{ scale: 1.03 }}
+              className="bg-[#0a0a0a] border border-gray-700
+                         p-6 rounded-xl text-center
+                         transition-all duration-300
+                         hover:border-cyan-400"
             >
 
-              <div className="text-cyan-400 text-3xl mb-4 flex justify-center">
+              {/* ICON */}
+              <div className="text-cyan-400 text-2xl mb-3 flex justify-center">
                 {service.icon}
               </div>
 
-              <h3 className="text-lg font-semibold mb-3">
+              {/* TITLE */}
+              <h3 className="text-base font-semibold mb-2">
                 {service.title}
               </h3>
 
-              <p className="text-gray-400 text-sm">
+              {/* DESC */}
+              <p className="text-gray-400 text-sm leading-relaxed">
                 {service.desc}
               </p>
 
@@ -77,40 +74,38 @@ export default function FreeliotechModernSection() {
 
         </div>
 
-        {/* Bottom Section */}
+        {/* BOTTOM SECTION */}
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center mt-28">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mt-16">
 
-          {/* Image */}
-
+          {/* IMAGE */}
           <motion.img
             src="https://jdlt.co.uk/images/services/web-app-isometric-720.png"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 6, repeat: Infinity }}
-            className="max-w-md mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="w-full max-w-sm mx-auto"
           />
 
-          {/* Content */}
-
+          {/* CONTENT */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            className="space-y-6"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-4 text-center lg:text-left"
           >
 
-            <h3 className="text-3xl font-bold">
+            <h3 className="text-2xl md:text-3xl font-bold">
               Building Future-Ready Digital Products
             </h3>
 
-            <p className="text-gray-400">
+            <p className="text-gray-400 text-sm md:text-base">
               Our development team combines innovation, modern
               frameworks and industry best practices to build
-              scalable digital platforms for businesses worldwide.
+              scalable digital platforms.
             </p>
 
-            <ul className="space-y-3 text-gray-300">
+            <ul className="space-y-2 text-gray-300 text-sm">
               <li>✔ Agile Development Process</li>
               <li>✔ Modern Technology Stack</li>
               <li>✔ Scalable Architecture</li>

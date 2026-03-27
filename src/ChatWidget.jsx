@@ -4,11 +4,10 @@ import {
   FaMicrophone,
   FaPaperPlane,
   FaComments,
-  FaRobot
+  FaRobot,
 } from "react-icons/fa";
-import robot from "./assets/robot.png";
-export default function FLTBot() {
 
+export default function FLTBot() {
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState("");
   const [chat, setChat] = useState(() => {
@@ -20,81 +19,142 @@ export default function FLTBot() {
   const chatEndRef = useRef(null);
 
   const FAQ = [
+    {
+      q: ["hello", "hi", "hey"],
+      a: "Hello 👋 Welcome to Tech Training, Innovation & Certification Hub How can I help you today?",
+    },
+    {
+      q: ["course", "training"],
+      a: "We offer courses like Full Stack Development, AI, ML, Cyber Security and Data Science.",
+    },
+    {
+      q: ["internship"],
+      a: "Internships are available in Web Development, MERN Stack, Python and AI.",
+    },
+    {
+      q: ["fees", "price", "cost"],
+      a: "Most training programs are affordable between ₹499 - ₹799.",
+    },
+    {
+      q: ["certificate"],
+      a: "After completing training you will receive a verified digital certificate.",
+    },
 
-{ q: ["hello","hi","hey"], a: "Hello 👋 Welcome to Freeliotech. How can I help you today?" },
-{ q: ["course","training"], a: "We offer courses like Full Stack Development, AI, ML, Cyber Security and Data Science." },
-{ q: ["internship"], a: "Internships are available in Web Development, MERN Stack, Python and AI." },
-{ q: ["fees","price","cost"], a: "Most training programs are affordable between ₹499 - ₹799." },
-{ q: ["certificate"], a: "After completing training you will receive a verified digital certificate." },
+    /* COURSE QUESTIONS */
 
-/* COURSE QUESTIONS */
+    { q: ["python"], a: "Yes we provide Python programming course." },
+    {
+      q: ["react"],
+      a: "React development training is included in Full Stack course.",
+    },
+    {
+      q: ["mern"],
+      a: "MERN stack training includes MongoDB, Express, React and Node.js.",
+    },
+    { q: ["ai"], a: "Artificial Intelligence training is available." },
+    {
+      q: ["data science"],
+      a: "Data Science course with real projects is available.",
+    },
+    { q: ["cyber security"], a: "Cyber Security course is available." },
+    {
+      q: ["web development"],
+      a: "Full Stack Web Development course is available.",
+    },
+    { q: ["duration"], a: "Course duration is usually 1 to 3 months." },
+    { q: ["online"], a: "All courses are available online." },
+    { q: ["live class"], a: "Yes we provide live training sessions." },
 
-{ q: ["python"], a: "Yes we provide Python programming course." },
-{ q: ["react"], a: "React development training is included in Full Stack course." },
-{ q: ["mern"], a: "MERN stack training includes MongoDB, Express, React and Node.js." },
-{ q: ["ai"], a: "Artificial Intelligence training is available." },
-{ q: ["data science"], a: "Data Science course with real projects is available." },
-{ q: ["cyber security"], a: "Cyber Security course is available." },
-{ q: ["web development"], a: "Full Stack Web Development course is available." },
-{ q: ["duration"], a: "Course duration is usually 1 to 3 months." },
-{ q: ["online"], a: "All courses are available online." },
-{ q: ["live class"], a: "Yes we provide live training sessions." },
+    /* INTERNSHIP */
 
-/* INTERNSHIP */
+    {
+      q: ["internship duration"],
+      a: "Internship duration is usually 1–2 months.",
+    },
+    { q: ["remote internship"], a: "Yes internships are completely remote." },
+    { q: ["project"], a: "You will work on real industry projects." },
+    {
+      q: ["experience letter"],
+      a: "Yes experience letter is provided after internship.",
+    },
+    {
+      q: ["internship certificate"],
+      a: "Yes verified internship certificate is provided.",
+    },
 
-{ q: ["internship duration"], a: "Internship duration is usually 1–2 months." },
-{ q: ["remote internship"], a: "Yes internships are completely remote." },
-{ q: ["project"], a: "You will work on real industry projects." },
-{ q: ["experience letter"], a: "Yes experience letter is provided after internship." },
-{ q: ["internship certificate"], a: "Yes verified internship certificate is provided." },
+    /* PAYMENT */
 
-/* PAYMENT */
+    {
+      q: ["payment"],
+      a: "Payment can be done via UPI, Debit Card or Credit Card.",
+    },
+    { q: ["upi"], a: "Yes UPI payments are accepted." },
+    { q: ["refund"], a: "Fees are generally non refundable." },
+    {
+      q: ["discount"],
+      a: "Discount offers may be available during promotions.",
+    },
+    { q: ["invoice"], a: "Payment receipt will be provided." },
 
-{ q: ["payment"], a: "Payment can be done via UPI, Debit Card or Credit Card." },
-{ q: ["upi"], a: "Yes UPI payments are accepted." },
-{ q: ["refund"], a: "Fees are generally non refundable." },
-{ q: ["discount"], a: "Discount offers may be available during promotions." },
-{ q: ["invoice"], a: "Payment receipt will be provided." },
+    /* ACCOUNT */
 
-/* ACCOUNT */
+    {
+      q: ["register"],
+      a: "You can register from our website registration page.",
+    },
+    { q: ["login"], a: "Use your email and password to login." },
+    { q: ["forgot password"], a: "Click on forgot password to reset." },
+    { q: ["dashboard"], a: "After login you will see your student dashboard." },
+    {
+      q: ["profile"],
+      a: "You can update your profile from dashboard settings.",
+    },
 
-{ q: ["register"], a: "You can register from our website registration page." },
-{ q: ["login"], a: "Use your email and password to login." },
-{ q: ["forgot password"], a: "Click on forgot password to reset." },
-{ q: ["dashboard"], a: "After login you will see your student dashboard." },
-{ q: ["profile"], a: "You can update your profile from dashboard settings." },
+    /* CERTIFICATE */
 
-/* CERTIFICATE */
+    {
+      q: ["download certificate"],
+      a: "Certificate can be downloaded from your dashboard.",
+    },
+    {
+      q: ["certificate id"],
+      a: "Each certificate contains unique verification ID.",
+    },
+    { q: ["qr certificate"], a: "Certificates include QR verification." },
+    {
+      q: ["verify certificate"],
+      a: "Companies can verify certificate via QR code.",
+    },
 
-{ q: ["download certificate"], a: "Certificate can be downloaded from your dashboard." },
-{ q: ["certificate id"], a: "Each certificate contains unique verification ID." },
-{ q: ["qr certificate"], a: "Certificates include QR verification." },
-{ q: ["verify certificate"], a: "Companies can verify certificate via QR code." },
+    /* TECH QUESTIONS */
 
-/* TECH QUESTIONS */
+    {
+      q: ["javascript"],
+      a: "JavaScript training is included in web development course.",
+    },
+    { q: ["node"], a: "Node.js backend development training is available." },
+    { q: ["express"], a: "Express.js API development training is included." },
+    { q: ["mongodb"], a: "MongoDB database training is included." },
+    { q: ["api"], a: "You will learn how to build APIs." },
 
-{ q: ["javascript"], a: "JavaScript training is included in web development course." },
-{ q: ["node"], a: "Node.js backend development training is available." },
-{ q: ["express"], a: "Express.js API development training is included." },
-{ q: ["mongodb"], a: "MongoDB database training is included." },
-{ q: ["api"], a: "You will learn how to build APIs." },
+    /* SUPPORT */
 
-/* SUPPORT */
+    { q: ["support"], a: "Our support team is available to help you." },
+    { q: ["contact"], a: "Contact support@freeliotech.in for help." },
+    { q: ["email"], a: "Support email: support@freeliotech.in" },
+    {
+      q: ["help"],
+      a: "I can help with courses, internships, certificates and support.",
+    },
 
-{ q: ["support"], a: "Our support team is available to help you." },
-{ q: ["contact"], a: "Contact support@freeliotech.in for help." },
-{ q: ["email"], a: "Support email: support@freeliotech.in" },
-{ q: ["help"], a: "I can help with courses, internships, certificates and support." },
+    /* EXTRA QUESTIONS */
 
-/* EXTRA QUESTIONS */
-
-{ q: ["mentor"], a: "Expert mentors will guide you during training." },
-{ q: ["portfolio"], a: "You will build real portfolio projects." },
-{ q: ["job"], a: "Courses help improve job opportunities." },
-{ q: ["placement"], a: "Placement guidance may be provided." },
-{ q: ["thank"], a: "You're welcome 😊 Happy learning!" }
-
-];
+    { q: ["mentor"], a: "Expert mentors will guide you during training." },
+    { q: ["portfolio"], a: "You will build real portfolio projects." },
+    { q: ["job"], a: "Courses help improve job opportunities." },
+    { q: ["placement"], a: "Placement guidance may be provided." },
+    { q: ["thank"], a: "You're welcome 😊 Happy learning!" },
+  ];
   /* AUTO SCROLL */
 
   const scrollBottom = () => {
@@ -111,7 +171,6 @@ export default function FLTBot() {
   /* VOICE INPUT */
 
   const startVoiceInput = () => {
-
     if (!window.webkitSpeechRecognition) {
       alert("Voice input not supported in this browser");
       return;
@@ -131,7 +190,6 @@ export default function FLTBot() {
   /* TEXT TO SPEECH */
 
   const speak = (text) => {
-
     const speech = new SpeechSynthesisUtterance(text);
 
     speech.pitch = 1;
@@ -141,31 +199,29 @@ export default function FLTBot() {
   };
 
   /* SIMPLE AI LOGIC */
-const aiReply = async (input) => {
+  const aiReply = async (input) => {
+    setTyping(true);
 
-  setTyping(true);
+    await new Promise((res) => setTimeout(res, 900));
 
-  await new Promise((res) => setTimeout(res, 900));
+    const text = input.toLowerCase();
 
-  const text = input.toLowerCase();
+    let reply = "Sorry, I couldn't understand. Please contact support.";
 
-  let reply = "Sorry, I couldn't understand. Please contact support.";
-
-  for (let item of FAQ) {
-    if (item.q.some(keyword => text.includes(keyword))) {
-      reply = item.a;
-      break;
+    for (let item of FAQ) {
+      if (item.q.some((keyword) => text.includes(keyword))) {
+        reply = item.a;
+        break;
+      }
     }
-  }
 
-  setTyping(false);
+    setTyping(false);
 
-  return reply;
-};
+    return reply;
+  };
   /* SEND MESSAGE */
 
   const sendMessage = async () => {
-
     if (!msg.trim()) return;
 
     const userMsg = { from: "user", text: msg };
@@ -185,43 +241,33 @@ const aiReply = async (input) => {
 
   return (
     <>
-
       {/* FLOATING FLT BOT BUTTON */}
 
-    {/* FLOATING ROBOT IMAGE BUTTON */}
+      {/* FLOATING ROBOT IMAGE BUTTON */}
 
-{!open && (
+      {!open && (
+        <div className="fixed bottom-6 right-6 z-[9999]">
+          <button
+            onClick={() => setOpen(true)}
+            className="relative hover:scale-110 transition"
+          >
+            <img
+              src="https://www.ndu.digital/assets/images/robote.png"
+              alt="robot"
+              className="w-10 h-auto"
+            />
 
-<div className="fixed bottom-6 right-6 z-[9999]">
+            {/* Pulse animation */}
 
-<button
-onClick={() => setOpen(true)}
-className="relative hover:scale-110 transition"
->
-
-<img
-src={robot}
-alt="FLT Bot"
-className="w-16 h-16 rounded-full shadow-2xl"
-/>
-
-{/* Pulse animation */}
-
-<span className="absolute inset-0 rounded-full border-2 border-cyan-400 animate-ping opacity-40"></span>
-
-</button>
-
-</div>
-
-)}
-
+            <span className="absolute inset-0 rounded-full border-2 border-cyan-400 animate-ping opacity-40"></span>
+          </button>
+        </div>
+      )}
 
       {/* CHAT WINDOW */}
 
       <AnimatePresence>
-
         {open && (
-
           <motion.div
             initial={{ opacity: 0, y: 70 }}
             animate={{ opacity: 1, y: 0 }}
@@ -235,19 +281,13 @@ className="w-16 h-16 rounded-full shadow-2xl"
               overflow-hidden
             "
           >
-
             {/* HEADER */}
 
             <div className="p-4 bg-cyan-700/40 border-b border-cyan-400/30 flex justify-between items-center">
-
               <div className="flex items-center gap-2">
-
                 <FaRobot className="text-cyan-300 text-xl" />
 
-                <h2 className="text-xl font-bold text-cyan-300">
-                  FLT- AI
-                </h2>
-
+                <h2 className="text-xl font-bold text-cyan-300">ttic-ai</h2>
               </div>
 
               <button
@@ -256,15 +296,12 @@ className="w-16 h-16 rounded-full shadow-2xl"
               >
                 ✕
               </button>
-
             </div>
 
             {/* CHAT BODY */}
 
             <div className="h-96 overflow-y-auto px-4 py-3 space-y-3">
-
               {chat.map((c, i) => (
-
                 <div
                   key={i}
                   className={`max-w-[75%] px-3 py-2 rounded-xl ${
@@ -275,7 +312,6 @@ className="w-16 h-16 rounded-full shadow-2xl"
                 >
                   {c.text}
                 </div>
-
               ))}
 
               {/* TYPING ANIMATION */}
@@ -289,13 +325,11 @@ className="w-16 h-16 rounded-full shadow-2xl"
               )}
 
               <div ref={chatEndRef}></div>
-
             </div>
 
             {/* INPUT */}
 
             <div className="p-3 bg-[#0e152a] border-t border-cyan-400/20 flex gap-2">
-
               <button
                 onClick={startVoiceInput}
                 className="p-2 bg-purple-500 text-white rounded-lg hover:bg-purple-400"
@@ -320,15 +354,10 @@ className="w-16 h-16 rounded-full shadow-2xl"
               >
                 <FaPaperPlane />
               </button>
-
             </div>
-
           </motion.div>
-
         )}
-
       </AnimatePresence>
-
     </>
   );
 }

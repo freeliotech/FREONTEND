@@ -3,28 +3,25 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { ApiContext } from "../../config/Api";
 import { FaLaptopCode } from "react-icons/fa";
-
+import img from "../../assets/logo.png"
 export default function StepBranches({ setBranch, setStep }) {
-
   const API_BASE_URL = ApiContext;
   const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     axios
       .get(`${API_BASE_URL}/internships`)
-      .then(res => {
+      .then((res) => {
         setBranches(res.data);
         setLoading(false);
       })
       .catch(() => setLoading(false));
-
   }, []);
 
   if (loading) {
     return (
-      <div className="text-center text-gray-400 text-lg py-20">
+      <div className="text-center text-gray-400 py-20">
         Loading internships...
       </div>
     );
@@ -32,108 +29,103 @@ export default function StepBranches({ setBranch, setStep }) {
 
   if (!branches.length) {
     return (
-      <div className="text-center text-gray-500 text-lg py-20">
+      <div className="text-center text-gray-500 py-20">
         No internships available
       </div>
     );
   }
 
   return (
-
     <div className="max-w-7xl mx-auto px-6">
 
-      {/* Responsive Grid */}
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
         {branches.map((b, i) => (
+<motion.div
+  key={b._id}
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: i * 0.08 }}
+  whileHover={{ y: -8, scale: 1.02 }}
+  className="
+     bg-transparent border border-white/10
+    rounded-xl overflow-hidden
+    hover:border-purple-500
+    hover:shadow-[0_0_20px_rgba(168,85,247,0.25)]
+    transition-all duration-300
+    cursor-pointer h-[330px] flex flex-col
+    group
+  "
+  onClick={() => {
+    setBranch(b);
+    setStep(1);
+  }}
+>
 
-          <motion.div
-            key={b._id}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            whileHover={{ y: -12, scale: 1.03 }}
-            className="relative group cursor-pointer"
-            onClick={() => {
-              setBranch(b);
-              setStep(1);
-            }}
-          >
+  {/* IMAGE (60%) */}
+  <div className="h-[60%] overflow-hidden relative">
 
-            {/* Gradient Border */}
+    <img
+      src={b.img}
+      alt={b.name}
+      className="w-full h-full object-cover transition duration-500 group-hover:scale-110"
+    />
 
-            <div className="p-[2px] rounded-3xl bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 group-hover:from-pink-500 group-hover:via-cyan-400 group-hover:to-purple-500 transition-all duration-500">
+    {/* DARK OVERLAY */}
+    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition" />
 
-              <div className="bg-[#04070d] rounded-3xl overflow-hidden">
+  </div>
 
-                {/* Badge */}
+  {/* CONTENT (40%) */}
+  <div className="h-[40%] p-4 flex flex-col justify-between">
 
-                <div className="absolute top-3 left-3 z-10">
+    {/* TEXT */}
+    <div>
+      <h3 className="text-white font-semibold text-sm mb-1 group-hover:text-purple-400 transition">
+        {b.name}
+      </h3>
 
-                  <span className="flex items-center gap-1 px-3 py-1 text-xs font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-black rounded-full shadow">
+      <p className="text-gray-400 text-xs leading-relaxed line-clamp-2 group-hover:text-gray-300 transition">
+        {b.description}
+      </p>
+    </div>
 
-                    <FaLaptopCode size={12} />
-                    Internship
+    {/* BOTTOM */}
+    <div className="flex items-center justify-between mt-3">
 
-                  </span>
+      {/* PRICE + ICON */}
+      <div className="flex items-center gap-2 bg-[#1a1a1a] px-2 py-1 rounded-md">
 
-                </div>
+        <img
+          src={img}
+          alt="icon"
+          className="w-4 h-4 object-contain"
+        />
 
-                {/* Image */}
+        <span className="text-green-400 font-semibold text-sm">
+          ₹{b.price || 799}
+        </span>
 
-                <div className="overflow-hidden">
+      </div>
 
-                  <img
-                    src={b.img}
-                    alt={b.name}
-                    className="h-48 w-full object-cover transition duration-500 group-hover:scale-110"
-                  />
+      {/* BUTTON */}
+      <button className="
+        text-xs px-3 py-1 rounded-md
+        bg-purple-600 hover:bg-purple-700
+        hover:shadow-[0_0_10px_rgba(168,85,247,0.6)]
+        transition-all duration-300
+      ">
+         Apply →
+      </button>
 
-                </div>
+    </div>
+  </div>
 
-                {/* Content */}
-
-                <div className="p-5 space-y-3">
-
-                  <h3 className="text-lg text-cyan-300 font-semibold">
-                    {b.name}
-                  </h3>
-
-                  <p className="text-gray-400 text-sm line-clamp-2">
-                    {b.description}
-                  </p>
-
-                  {/* Price */}
-
-                  <div className="flex justify-between items-center pt-2">
-
-                    <span className="text-green-400 font-bold text-lg">
-                      ₹{b.price || 799}
-                    </span>
-
-                    <motion.span
-                      whileHover={{ x: 5 }}
-                      className="text-cyan-400 font-semibold text-sm"
-                    >
-                      Continue →
-                    </motion.span>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </motion.div>
-
+</motion.div>
         ))}
 
       </div>
 
     </div>
-
   );
 }

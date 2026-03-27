@@ -27,15 +27,14 @@ export default function HeroExactLikeImage() {
             transition={{ duration: 0.8 }}
             className="text-3xl md:text-5xl font-bold leading-tight"
           >
-            <span className="text-gray-400 font-light">FreeLioTech</span>
+            <span className="    bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Tech Training, Innovation & Certification Hub</span>
             <br />
 
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            <span className="text-gray-400 font-light">
               Digital Courses
             </span>
 
-            <br />
-            Platform
+           
           </motion.h1>
 
           <motion.p
@@ -52,7 +51,7 @@ export default function HeroExactLikeImage() {
 
           <div className="space-y-4 pt-2">
             <Item icon={<FaBrain />} text="Artificial Intelligence" />
-            <Item icon={<FaMicrochip />} text="Semiconductor Technology" />
+           
             <Item icon={<FaShieldAlt />} text="Cyber Security" />
             <Item icon={<FaGraduationCap />} text="Professional Certifications" />
           </div>

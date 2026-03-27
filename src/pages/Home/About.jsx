@@ -80,7 +80,7 @@ export default function AboutUsSection() {
           <h2 className="text-4xl md:text-5xl font-extrabold leading-tight">
             At{" "}
             <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              FreeLioTech
+              Tech Training, Innovation & Certification Hub
             </span>
             , we build the next generation of IT innovators
           </h2>
@@ -129,10 +129,7 @@ export default function AboutUsSection() {
 
           {/* STATS */}
 
-          <div className="flex gap-10 pt-6">
-
-
-          </div>
+     
 
    
 

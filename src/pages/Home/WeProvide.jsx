@@ -51,76 +51,61 @@ export default function WeProvideDark() {
 
 
 /* ---------------- CARD ---------------- */
-
 function DarkCard({ img, title, desc, onClick }) {
   return (
-
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -12 }}
-      transition={{ duration: 0.5 }}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.4 }}
       onClick={onClick}
-      className="group relative cursor-pointer"
+      className="group cursor-pointer"
     >
+      <div
+        className="
+        border border-gray-700
+        rounded-2xl
+        p-6
+        text-center
+        bg-[#0a0a0a]
+        transition-all duration-300
+        hover:border-purple-500
+        hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]
+      "
+      >
+        {/* IMAGE */}
+        <motion.img
+          src={img}
+          alt={title}
+          whileHover={{ scale: 1.05 }}
+          className="h-36 mx-auto mb-5 object-contain"
+        />
 
-      {/* GRADIENT BORDER */}
+        {/* TITLE */}
+        <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-purple-400 transition">
+          {title}
+        </h3>
 
-      <div className="p-[2px] rounded-3xl bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
+        {/* DESC */}
+        <p className="text-gray-400 text-sm mb-6">
+          {desc}
+        </p>
 
-        <div className="
-          bg-black
-          backdrop-blur-xl
-          rounded-3xl
-          p-8
-          text-center
-          h-full
-          transition
-          group-hover:bg-[#0d1524]/90
-        ">
-
-          {/* IMAGE */}
-
-          <motion.img
-            src={img}
-            alt={title}
-            whileHover={{ scale: 1.05 }}
-            className="h-44 mx-auto mb-6"
-          />
-
-          {/* TITLE */}
-
-          <h3 className="text-2xl font-bold text-cyan-300 mb-4">
-            {title}
-          </h3>
-
-          {/* DESCRIPTION */}
-
-          <p className="text-gray-400 text-sm leading-relaxed mb-8">
-            {desc}
-          </p>
-
-          {/* BUTTON */}
-
-          <motion.button
-            whileHover={{ scale: 1.15 }}
-            className="
-            w-12 h-12 mx-auto flex items-center justify-center
-            rounded-full
-            bg-gradient-to-r from-cyan-400 to-blue-500
-            text-black
-            shadow-[0_0_20px_rgba(0,255,255,0.6)]
-            transition
-            "
-          >
-            <FaArrowRight />
-          </motion.button>
-
+        {/* BUTTON */}
+        <div
+          className="
+          w-10 h-10 mx-auto flex items-center justify-center
+          rounded-full
+          border border-gray-600
+          text-gray-300
+          transition-all duration-300
+          group-hover:border-purple-500
+          group-hover:text-purple-400
+        "
+        >
+          <FaArrowRight />
         </div>
-
       </div>
-
     </motion.div>
-
   );
 }
