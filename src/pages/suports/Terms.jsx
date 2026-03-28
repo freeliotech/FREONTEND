@@ -24,7 +24,8 @@ export default function Terms() {
 
           <p className="text-lg">
             These Terms & Conditions govern your access and use of{" "}
-            <span className="text-cyan-400 font-semibold">Freeliotech</span>. 
+            <span className="text-cyan-400 font-semibold">
+Tech Training, Innovation & Certification Hub</span>. 
             By using our services, you agree to comply with these Terms.
           </p>
 

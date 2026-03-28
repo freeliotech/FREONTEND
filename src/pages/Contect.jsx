@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 
 import {
   FaEnvelope,
-  FaPhone,
   FaLinkedinIn,
   FaInstagram,
   FaYoutube,
@@ -15,7 +14,6 @@ const CONTACT_IMAGE =
   "https://virtunexa.com/wp-content/uploads/2024/03/18.png";
 
 export default function Contact({ user }) {
-
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -72,12 +70,17 @@ export default function Contact({ user }) {
 
   return (
     <section className="relative min-h-screen px-6 py-24 overflow-hidden text-white">
+{/* 🟦 SQUARE GRID SAFE BACKGROUND */}
 
-      {/* BACKGROUND */}
+<div className="absolute inset-0 bg-trancparent overflow-hidden">
 
-      <div className="absolute inset-0 bg-[#020617]" />
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-sky-500/20 blur-[160px]" />
-      <div className="absolute -bottom-32 -right-32 w-[28rem] h-[28rem] bg-cyan-400/20 blur-[180px]" />
+
+
+  {/* center glow */}
+  <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-cyan-500/10 blur-[140px] -translate-x-1/2 -translate-y-1/2" />
+
+</div>
+      {/* MAIN CONTENT */}
 
       <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
@@ -89,15 +92,13 @@ export default function Contact({ user }) {
           transition={{ duration: 0.7 }}
           className="flex justify-center"
         >
-
           <motion.img
             src={CONTACT_IMAGE}
             alt="Contact"
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 6, repeat: Infinity }}
-            className="w-[85%] sm:w-[70%] lg:w-[90%] max-w-md"
+            className="w-[85%] sm:w-[70%] lg:w-[90%] max-w-md drop-shadow-[0_0_30px_rgba(0,255,255,0.3)]"
           />
-
         </motion.div>
 
         {/* CONTACT CARD */}
@@ -106,9 +107,8 @@ export default function Contact({ user }) {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-xl"
+          className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-[0_0_40px_rgba(0,255,255,0.08)]"
         >
-
           <h1 className="text-4xl font-bold mb-4">
             Get in{" "}
             <span className="bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent">
@@ -117,42 +117,22 @@ export default function Contact({ user }) {
           </h1>
 
           <p className="text-gray-400 mb-8">
-            Contact our team for internships, courses, projects or any
-            technical support.
+            Contact our team for internships, courses, projects or support.
           </p>
 
           {/* CONTACT INFO */}
 
           <div className="grid sm:grid-cols-2 gap-4 mb-8">
 
-            <InfoCard
-              icon={<FaEnvelope />}
-              label="Admin"
-              value="admin@freliotech.in"
-            />
-
-            <InfoCard
-              icon={<FaEnvelope />}
-              label="Internship"
-              value="internship@freliotech.in"
-            />
-
-            <InfoCard
-              icon={<FaEnvelope />}
-              label="Courses"
-              value="courses@freliotech.in"
-            />
-
-            <InfoCard
-              icon={<FaEnvelope />}
-              label="Support"
-              value="support@freliotech.in"
-            />
+            <InfoCard icon={<FaEnvelope />} label="Admin" value="admin@ttichub.co.in" />
+            <InfoCard icon={<FaEnvelope />} label="Internship" value="internship@ttichub.co.in" />
+            <InfoCard icon={<FaEnvelope />} label="Courses" value="courses@ttichub.co.in" />
+            <InfoCard icon={<FaEnvelope />} label="Support" value="support@ttichub.co.in" />
 
             <InfoCard
               icon={<FaWhatsapp />}
-              label="WhatsApp Support"
-              value="+91 6205631578"
+              label="WhatsApp"
+              value="+91 8292928328"
               link="https://wa.me/918292928328"
             />
 
@@ -165,7 +145,7 @@ export default function Contact({ user }) {
               <motion.div
                 key={i}
                 whileHover={{ scale: 1.2 }}
-                className="text-gray-400 hover:text-sky-400 cursor-pointer"
+                className="text-gray-400 hover:text-cyan-400 cursor-pointer"
               >
                 <Icon />
               </motion.div>
@@ -179,7 +159,6 @@ export default function Contact({ user }) {
             animate={shake ? { x: [-6, 6, -6, 6, 0] } : {}}
             className="space-y-5"
           >
-
             <div className="grid md:grid-cols-2 gap-5">
 
               <Input
@@ -212,27 +191,22 @@ export default function Contact({ user }) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               disabled={sending}
-              className="w-full py-3 rounded-xl font-bold bg-gradient-to-r from-sky-400 to-cyan-500 text-black"
+              className="w-full py-3 rounded-xl font-bold bg-gradient-to-r from-cyan-400 to-sky-500 text-black"
             >
-
               {sending ? "Sending..." : "Send Message"}
-
             </motion.button>
 
           </motion.form>
-
         </motion.div>
-
       </div>
-
     </section>
   );
 }
 
-/* INPUT */
+/* INPUT STYLE */
 
 const input =
-  "w-full p-3 rounded-xl bg-white/5 border border-white/10 focus:border-sky-400 outline-none";
+  "w-full p-3 rounded-xl bg-white/5 border border-white/10 focus:border-cyan-400 outline-none";
 
 /* INPUT COMPONENT */
 
@@ -243,7 +217,6 @@ function Input(props) {
 /* INFO CARD */
 
 function InfoCard({ icon, label, value, link }) {
-
   const url =
     link ||
     (value.includes("@")
@@ -257,16 +230,14 @@ function InfoCard({ icon, label, value, link }) {
       href={url}
       target="_blank"
       whileHover={{ y: -4 }}
-      className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-xl"
+      className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-xl hover:border-cyan-400/40 transition"
     >
-
-      <div className="text-sky-400 text-xl">{icon}</div>
+      <div className="text-cyan-400 text-xl">{icon}</div>
 
       <div>
         <p className="text-xs text-gray-400">{label}</p>
         <p className="font-medium text-white">{value}</p>
       </div>
-
     </motion.a>
   );
 }

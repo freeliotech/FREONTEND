@@ -24,7 +24,8 @@ export default function Rules() {
 
           <p className="text-lg">
             These rules ensure a safe, fair, and professional environment on  
-            <span className="text-yellow-400 font-semibold"> Freeliotech</span>.
+            <span className="text-yellow-400 font-semibold"> 
+Tech Training, Innovation & Certification Hub</span>.
           </p>
 
           <RuleSection title="1. Respect & Conduct">

@@ -70,6 +70,7 @@ import LogoDesign from "./pages/Home/LogoDesign";
 import View_deatils from "./pages/Intership/View_deatils";
 import VerifyCertificate from "./pages/VerifyCertificate";
 import Cartificate_all from "./pages/admin/Cartificate_intership";
+import About_ttic from "./pages/Home"
 /* ===== Styles ===== */
 import "./styles/pyq.css";
 
@@ -95,7 +96,7 @@ return ( <Router> <Background /> <div className="relative z-10"> <CustomCursor /
       {/* ===== SERVICES ===== */}
       <Route path="/services/app" element={<ServicesApp />} />
       <Route path="/services/web" element={<ServicesWeb />} />
-      <Route path="/services/LogoDesign" element={<LogoDesign />} />
+      <Route path="/services/about" element={<LogoDesign />} />
 
       {/* ===== INTERNSHIP ===== */}
       <Route path="/internship" element={<Intership />} />
@@ -160,6 +161,7 @@ return ( <Router> <Background /> <div className="relative z-10"> <CustomCursor /
       <Route path="/terms" element={<Terms />} />
       <Route path="/privacy-policy" element={<Privacy />} />
       <Route path="/rules" element={<Rules />} />
+      <Route path="about" element={<About_ttic />} />
 
       {/* ===== 404 ===== */}
       <Route path="*" element={<ErrorPage />} />

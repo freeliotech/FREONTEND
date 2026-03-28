@@ -41,31 +41,7 @@ export default function Footer() {
       {/* TOP BORDER */}
       <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent" />
 
-      {/* 🔥 BACKGROUND PARTICLES */}
-      {[...Array(20)].map((_, i) => {
-        const size = i % 3 === 0 ? "w-2 h-2" : "w-1 h-1";
 
-        return (
-          <motion.div
-            key={i}
-            className={`absolute ${size} bg-cyan-400 rounded-full opacity-30 shadow-[0_0_10px_rgba(0,255,255,0.8)]`}
-            style={{
-              top: `${(i * 13) % 100}%`,
-              left: `${(i * 29) % 100}%`,
-            }}
-            animate={{
-              y: [0, -15, 0],
-              opacity: [0.2, 0.7, 0.2],
-            }}
-            transition={{
-              duration: 4 + (i % 5),
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.2,
-            }}
-          />
-        );
-      })}
 
       {/* 🔥 GLOW BACKGROUND */}
       <div className="absolute -top-40 -left-40 w-[400px] h-[400px] bg-cyan-500/10 blur-[200px]" />
@@ -101,14 +77,16 @@ export default function Footer() {
               </li>
 
               <li>
-                <motion.a
-                  href="https://wa.me/918292928328"
-                  target="_blank"
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-2 text-green-400 hover:text-green-300"
-                >
-                  <FaWhatsapp /> WhatsApp Chat
-                </motion.a>
+               <motion.a
+  href="https://wa.me/918292928328"
+  target="_blank"
+  whileHover={{ scale: 1.05 }}
+  className="flex items-center gap-2 text-white"
+>
+  <FaWhatsapp className="text-green-500 text-lg" />
+  <span className="text-white/50    hover:text-white">WhatsApp</span>
+</motion.a>
+                  
               </li>
 
               <li className="flex gap-2 hover:text-white hover:translate-x-1 transition">
@@ -139,7 +117,7 @@ export default function Footer() {
 
             <ul className="space-y-2 text-sm">
               <li><Link to="/" className="hover:text-white hover:translate-x-1 transition">Home</Link></li>
-              <li><Link to="/about" className="hover:text-white hover:translate-x-1 transition">About</Link></li>
+               <li><Link to="/about" className="hover:text-white hover:translate-x-1 transition">AboutUs</Link></li>
               <li><Link to="/courses" className="hover:text-white hover:translate-x-1 transition">Courses</Link></li>
               <li><Link to="/internship" className="hover:text-white hover:translate-x-1 transition">Internship</Link></li>
             </ul>

@@ -23,7 +23,8 @@ export default function Privacy() {
         <div className="space-y-6 leading-relaxed text-center md:text-left">
 
           <p className="text-lg">
-            At <span className="text-green-400 font-semibold">Freeliotech</span>,  
+            At <span className="text-green-400 font-semibold">
+Tech Training, Innovation & Certification Hub</span>,  
             we respect your privacy and are committed to protecting your personal data.
           </p>
 

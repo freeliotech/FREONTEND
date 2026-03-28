@@ -1,129 +1,193 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaPalette, FaPenNib, FaMagic, FaRocket } from "react-icons/fa";
+import video  from "../../assets/slide1.mp4"
+import {
+  FaCheckCircle,
+  FaLaptopCode,
+  FaMobileAlt,
+  FaGlobe,
+  FaUserTie,
+  FaLightbulb,
+  FaRocket,
+  FaUsers,
+  FaCode
+} from "react-icons/fa";
 
-const process = [
-  {
-    icon: <FaPalette />,
-    title: "Brand Research",
-    desc: "We analyze your brand identity, audience and competitors before designing.",
-  },
-  {
-    icon: <FaPenNib />,
-    title: "Concept Creation",
-    desc: "Multiple creative logo concepts are designed and refined.",
-  },
-  {
-    icon: <FaMagic />,
-    title: "Design Refinement",
-    desc: "Typography, colors, balance and style are perfected.",
-  },
-  {
-    icon: <FaRocket />,
-    title: "Final Delivery",
-    desc: "Final logo files optimized for web, print and social media.",
-  },
-];
+const fade = {
+  hidden: { opacity: 0, y: 60 },
+  show: { opacity: 1, y: 0 }
+};
 
-export default function LogoDesignPage() {
+const Section = ({ index, title, points, image, reverse, icon }) => {
   return (
-    <section className="relative bg-[#04070d] text-white overflow-hidden">
+    <section className="relative border-b border-white/10 group overflow-hidden">
 
-      {/* Gradient Glow Background */}
-      <div className="absolute -top-40 -left-40 w-[400px] h-[400px] bg-cyan-500/20 blur-[180px]" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple-500/20 blur-[180px]" />
+      {/* Glow Hover Background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl"></div>
 
-      {/* ================= HERO ================= */}
+      {/* Vertical Line */}
+      <div className="hidden md:block absolute left-10 top-0 bottom-0 w-[2px] bg-gradient-to-b from-purple-500 via-blue-500 to-transparent animate-pulse"></div>
 
-      <div className="max-w-7xl mx-auto px-6 py-32 grid md:grid-cols-2 gap-16 items-center">
+      <div
+        className={`flex flex-col md:flex-row ${
+          reverse ? "md:flex-row-reverse" : ""
+        } items-center gap-12 py-20 px-6 md:px-20 relative z-10`}
+      >
 
+{/* MEDIA (AUTO IMAGE / VIDEO) */}
+<motion.div
+  variants={fade}
+  initial="hidden"
+  whileInView="show"
+  transition={{ duration: 0.8 }}
+  className="w-full md:w-1/2 flex justify-center"
+>
+  <div className="relative group w-full max-w-xs">
+
+    {image?.includes(".mp4") ? (
+      <video
+        src={image}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full rounded-xl border border-white/10 shadow-xl object-cover group-hover:scale-110 transition duration-500"
+      />
+    ) : (
+      <img
+        src={image}
+        alt={title}
+        className="w-full rounded-xl border border-white/10 shadow-xl object-cover group-hover:scale-110 transition duration-500"
+      />
+    )}
+
+    {/* Glow */}
+    <div className="absolute inset-0 rounded-xl bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition"></div>
+
+  </div>
+</motion.div>
+
+        {/* CONTENT */}
         <motion.div
-          initial={{ opacity:0, y:40 }}
-          animate={{ opacity:1, y:0 }}
-          transition={{ duration:0.7 }}
-          className="space-y-8"
+          variants={fade}
+          initial="hidden"
+          whileInView="show"
+          transition={{ duration: 0.8 }}
+          className="w-full md:w-1/2 relative"
         >
 
-          <span className="px-4 py-2 bg-cyan-400/20 text-cyan-300 rounded-full text-sm">
-            Professional Logo Design
-          </span>
+          {/* NUMBER */}
+          <div className="absolute -left-14 top-0 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-white/10 text-purple-400 font-bold backdrop-blur-xl">
+            {index}
+          </div>
 
-          <h1 className="text-5xl font-extrabold leading-tight">
-            Build a <span className="text-cyan-400">Powerful Brand</span> <br/>
-            With a Unique Logo
-          </h1>
+          <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
+            {icon} {title}
+          </h2>
 
-          <p className="text-gray-400 max-w-xl">
-            We create memorable logos that communicate your brand identity,
-            attract customers and build long-term recognition.
-          </p>
-
-          <motion.button
-            whileHover={{ scale:1.08 }}
-            whileTap={{ scale:0.95 }}
-            className="px-8 py-3 rounded-xl font-bold bg-cyan-400 text-black
-            shadow-[0_0_25px_rgba(0,255,255,0.6)]"
-          >
-            Start Your Logo →
-          </motion.button>
+          <ul className="space-y-4 text-gray-300 text-sm">
+            {points.map((p, i) => (
+              <li key={i} className="flex gap-3 items-start group/item">
+                <FaCheckCircle className="text-purple-400 mt-1 text-sm group-hover/item:scale-125 transition" />
+                <span className="group-hover/item:text-white transition">
+                  {p}
+                </span>
+              </li>
+            ))}
+          </ul>
 
         </motion.div>
-
-        {/* Hero Image */}
-
-       <div className="relative flex justify-center items-center">
-
-  <div className="absolute w-[400px] h-[400px]
-  bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500
-  blur-[150px] opacity-30 rounded-full"/>
-
-  <motion.img
-    src="https://miro.medium.com/v2/resize:fit:1400/1*4A7BwOPaLRk0CKS2lEw0Tw.png"
-    animate={{ y:[0,-20,0] }}
-    transition={{ duration:5, repeat:Infinity }}
-    className="relative w-80 mx-auto
-    drop-shadow-[0_0_70px_rgba(0,255,255,0.7)]
-    [mask-image:radial-gradient(circle,white_60%,transparent_100%)]"
-  />
-
-</div>
-
       </div>
-
-
-      {/* ================= PROCESS ================= */}
-
-      <div className="max-w-6xl mx-auto px-6 py-32 text-center">
-
-        <div className="grid md:grid-cols-4 gap-10">
-
-          {process.map((step,i)=>(
-            <motion.div
-              key={i}
-              whileHover={{ y:-10 }}
-              className="p-8 bg-white/5 rounded-2xl border border-cyan-400/20
-              backdrop-blur-md"
-            >
-
-              <div className="text-cyan-400 text-3xl mb-4">
-                {step.icon}
-              </div>
-
-              <h3 className="font-semibold text-lg">
-                {step.title}
-              </h3>
-
-              <p className="text-gray-400 text-sm mt-2">
-                {step.desc}
-              </p>
-
-            </motion.div>
-          ))}
-
-        </div>
-
-      </div>
-
     </section>
+  );
+};
+
+export default function AboutInsaneUI() {
+  return (
+    <div className="bg-black text-white relative overflow-hidden">
+
+      {/* BACKGROUND ORBS */}
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-[120px] animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[120px] animate-pulse"></div>
+
+      {/* HERO */}
+      <div className="text-center py-28 px-6 border-b border-white/10 relative z-10">
+        <h3 className="text-5xl font-extrabold mb-6">
+          About <span className="bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">TTIC Hub</span>
+        </h3>
+        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+          Empowering developers with real-world skills, innovation, and next-generation technology experiences.
+        </p>
+      </div>
+
+      {/* SECTIONS */}
+      <Section
+        index="01"
+        title="Our Culture - Pagg"
+        icon={<FaLightbulb />}
+        image={video}
+        points={[
+          "Pagg symbolizes respect, trust, and connection.",
+          "We build a strong and supportive learning culture.",
+          "Encouraging collaboration and innovation.",
+          "Continuous growth mindset for every learner."
+        ]}
+      />
+
+      <Section
+        index="02"
+        title="Internship Programs"
+        reverse
+        icon={<FaLaptopCode />}
+        image="https://images.unsplash.com/photo-1552664730-d307ca884978"
+        points={[
+          "Real-world project-based internships.",
+          "Domains: AI/ML, Web, Python, IoT.",
+          "Mentorship from experts.",
+          "Portfolio + job-ready skills."
+        ]}
+      />
+
+      <Section
+        index="03"
+        title="Courses"
+        icon={<FaCode />}
+        image="https://images.unsplash.com/photo-1519389950473-47ba0277781c"
+        points={[
+          "Structured beginner to advanced learning.",
+          "Modern tech stack (MERN, AI, Cloud).",
+          "Hands-on coding approach.",
+          "Industry-relevant curriculum."
+        ]}
+      />
+
+      <Section
+        index="04"
+        title="Our Mission"
+        reverse
+        icon={<FaRocket />}
+        image="https://images.unsplash.com/photo-1507679799987-c73779587ccf"
+        points={[
+          "Provide practical education.",
+          "Bridge skill gap.",
+          "Empower youth.",
+          "Create professionals."
+        ]}
+      />
+
+      <Section
+        index="05"
+        title="Our Vision"
+        icon={<FaUsers />}
+        image="https://images.unsplash.com/photo-1492724441997-5dc865305da7"
+        points={[
+          "Global tech platform.",
+          "Strong developer community.",
+          "Innovation-driven growth.",
+          "Future-ready education."
+        ]}
+      />
+
+    </div>
   );
 }
