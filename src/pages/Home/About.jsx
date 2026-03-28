@@ -127,12 +127,6 @@ export default function AboutUsSection() {
 
           </div>
 
-          {/* STATS */}
-
-     
-
-   
-
         </motion.div>
 
       </div>

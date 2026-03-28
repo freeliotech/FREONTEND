@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { ApiContext } from "../config/Api";
-import Sv1 from "../assets/in5.png";
+import Sv1 from "../assets/in1.png";
 import Sv2 from "../assets/in3.jpg";
 import Sv6 from "../assets/in6.png";
 import Sv7 from "../assets/in7.png";
