@@ -9,7 +9,6 @@ export default function TrailCursor() {
     const handleMove = (e) => {
       const pos = { x: e.clientX, y: e.clientY };
       setCursor(pos);
-
       setPoints((prev) => {
         const newPoint = {
           x: pos.x,

@@ -1,196 +1,210 @@
-import React, {useRef,useState,useEffect} from "react";
+import React, { useRef, useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import {QRCodeCanvas} from "qrcode.react";
+import { QRCodeCanvas } from "qrcode.react";
 import axios from "axios";
+import logo from "../assets/logo.png"
+export default function CertificateGenerator() {
+  const certRef = useRef();
 
-export default function CertificateGenerator(){
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [domain, setDomain] = useState("");
+  const [duration, setDuration] = useState("");
+  const [certId, setCertId] = useState("");
 
-const certRef = useRef();
+  useEffect(() => {
+    const id = "FLT-" + Math.floor(100000 + Math.random() * 900000);
+    setCertId(id);
+  }, []);
 
-const [name,setName]=useState("");
-const [email,setEmail]=useState("");
-const [domain,setDomain]=useState("");
-const [duration,setDuration]=useState("");
-const [certId,setCertId]=useState("");
+  /* =========================
+     SAVE TO DATABASE
+  ========================= */
+  const generateCertificate = async () => {
+    try {
+      await axios.post(
+        "https://backend-production-7a212.up.railway.app/api/certificate/create",
+        {
+          name,
+          email,
+          domain,
+          duration,
+          certificateId: certId,
+        }
+      );
 
-useEffect(()=>{
+      alert("✅ Certificate Saved Successfully");
+    } catch (err) {
+      console.log(err);
+      alert("❌ Error saving certificate");
+    }
+  };
 
-const id="FLT-"+Math.floor(100000+Math.random()*900000);
-setCertId(id);
+  /* =========================
+     DOWNLOAD PDF
+  ========================= */
+  const downloadPDF = async () => {
+    const canvas = await html2canvas(certRef.current, {
+      scale: 3,
+    });
 
-},[]);
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("landscape", "mm", "a4");
+    pdf.addImage(imgData, "PNG", 0, 0, 297, 210);
+    pdf.save(`${name || "certificate"}.pdf`);
+  };
+
+  return (
+    <div className="min-h-screen bg-black text-white mt-15 p-10">
+      {/* ================= FORM ================= */}
+      <div className="max-w-md mx-auto bg-[#111] p-6 rounded-xl shadow-xl border border-gray-700">
+        <h2 className="text-2xl font-bold mb-4 text-cyan-400 text-center">
+          🎓 Generate Certificate
+        </h2>
+
+        <input
+          className="border border-gray-600 bg-black p-2 w-full mb-3 rounded text-white"
+          placeholder="Student Name"
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <input
+          className="border border-gray-600 bg-black p-2 w-full mb-3 rounded text-white"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          className="border border-gray-600 bg-black p-2 w-full mb-3 rounded text-white"
+          placeholder="Domain"
+          onChange={(e) => setDomain(e.target.value)}
+        />
+
+        <input
+          className="border border-gray-600 bg-black p-2 w-full mb-4 rounded text-white"
+          placeholder="Duration"
+          onChange={(e) => setDuration(e.target.value)}
+        />
+
+        <div className="flex gap-3">
+          <button
+            onClick={generateCertificate}
+            className="bg-cyan-500 hover:bg-cyan-400 text-black px-4 py-2 rounded w-full"
+          >
+            Save
+          </button>
+
+          <button
+            onClick={downloadPDF}
+            className="bg-green-500 hover:bg-green-400 text-black px-4 py-2 rounded w-full"
+          >
+            Download
+          </button>
+        </div>
+      </div>
+
+{/* ================= CERTIFICATE ================= */}
+<div className="flex justify-center mt-12">
+  <div
+    ref={certRef}
+    className="relative w-[1100px] h-[650px] bg-gradient-to-br from-gray-900 to-black text-white shadow-2xl rounded-xl overflow-hidden"
+  >
+    {/* Glow Border */}
+    <div className="absolute inset-0 border-[12px] border-cyan-500 rounded-xl opacity-30"></div>
+    <div className="absolute inset-3 border-[3px] border-purple-500 rounded-xl opacity-50"></div>
+
+    {/* 🔥 LEFT LOGO */}
+    <div className="absolute left-6 top-6">
+      <img
+        src={logo} 
+        alt="logo"
+        className="w-24 h-24 object-contain opacity-90"
+      />
+    </div>
 
 
-const generateCertificate = async()=>{
+    {/* Content */}
+    <div className="relative z-10 p-10 text-center">
+      <h1 className="text-5xl font-bold text-cyan-400 tracking-wide">
+        Tech Training, Innovation &  Certification Hub
+      </h1>
 
-await axios.post("http://localhost:5000/api/create",{
-
-name,
-email,
-domain,
-duration,
-certificateId:certId
-
-});
-
-};
-
-
-const downloadPDF = async()=>{
-
-const canvas = await html2canvas(certRef.current);
-
-const imgData = canvas.toDataURL("image/png");
-
-const pdf = new jsPDF("landscape","mm","a4");
-
-pdf.addImage(imgData,"PNG",0,0,297,210);
-
-pdf.save("certificate.pdf");
-
-};
-
-
-return(
-
-<div className="p-10 bg-gray-100 min-h-screen">
-
-<div className="max-w-md mx-auto bg-white p-6 shadow rounded">
-
-<h2 className="text-xl font-bold mb-4">
-Generate Certificate
+     <h2 className="text-2xl mt-3 text-gray-300 tracking-[4px] uppercase">
+ Certificate
 </h2>
 
-<input
-className="border p-2 w-full mb-2"
-placeholder="Student Name"
-onChange={(e)=>setName(e.target.value)}
-/>
+<p className="mt-1 text-gray-400">
+  This is to certify that
+</p>
 
-<input
-className="border p-2 w-full mb-2"
-placeholder="Email"
-onChange={(e)=>setEmail(e.target.value)}
-/>
-
-<input
-className="border p-2 w-full mb-2"
-placeholder="Domain"
-onChange={(e)=>setDomain(e.target.value)}
-/>
-
-<input
-className="border p-2 w-full mb-4"
-placeholder="Duration"
-onChange={(e)=>setDuration(e.target.value)}
-/>
-
-<button
-onClick={generateCertificate}
-className="bg-blue-600 text-white px-4 py-2 rounded"
->
-Save Certificate
-</button>
-
-<button
-onClick={downloadPDF}
-className="bg-green-600 text-white px-4 py-2 rounded ml-3"
->
-Download PDF
-</button>
-
-</div>
-
-
-
-{/* CERTIFICATE */}
-
-<div className="flex justify-center mt-10">
-
-<div
-ref={certRef}
-className="relative w-[1100px] h-[650px] bg-white p-10 shadow-xl"
-style={{border:"10px solid #1e3a8a"}}
->
-
-<div className="absolute inset-4 border-4 border-blue-400"></div>
-<div className="absolute inset-8 border-2 border-blue-600"></div>
-
-<div className="text-center">
-
-<h1 className="text-4xl font-bold">
-FREELIOTECH PVT LTD
+<h1 className="text-4xl font-bold text-white mt-1 tracking-wide">
+  {name || "Student Name"}
 </h1>
 
-<h2 className="text-xl mt-2">
-INTERNSHIP CERTIFICATE
+<p className="mt-0 text-gray-500">
+  ({email || "student@email.com"})
+</p>
+
+<p className="mt-1 text-gray-400 max-w-3xl mx-auto leading-relaxed">
+  has successfully completed an internship program in the field of
+</p>
+
+<h2 className="text-3xl font-semibold text-purple-400 mt-0">
+  {domain || "Artificial Intelligence"}
 </h2>
 
-<p className="mt-8">
-This certificate is proudly presented to
+<p className="mt-1 text-gray-400 max-w-3xl mx-auto leading-relaxed">
+  During this period, the candidate demonstrated exceptional dedication,
+  technical skills, and a strong commitment to learning and innovation.
 </p>
 
-<h1 className="text-4xl text-blue-700 mt-2">
-{name || "Student Name"}
-</h1>
 
-<p className="mt-2">
-Email : {email || "student@email.com"}
+
+<p className="mt-0 text-gray-400">
+  Duration :{" "}
+  <span className="text-white font-semibold">
+    {duration || "2 Months"}
+  </span>
 </p>
 
-<p className="mt-4">
-has successfully completed internship in
+<p className="mt-0 text-gray-400">
+  Certificate ID :{" "}
+  <span className="text-cyan-400 font-semibold">
+    {certId}
+  </span>
 </p>
 
-<h2 className="text-2xl font-semibold">
-{domain || "Artificial Intelligence"}
-</h2>
+      {/* QR CODE */}
+      <div className="flex justify-center mt-6">
+        <div className="bg-white p-2 rounded">
+          <QRCodeCanvas
+            value={`https://ttichub.co.in/verify/${certId}`}
+            size={100}
+          />
+        </div>
+      </div>
 
-<p>
-Duration : {duration || "2 Months"}
-</p>
+      <p className="mt-2 text-xs text-gray-500">
+        Scan to Verify Certificate
+      </p>
+    </div>
 
-<p>
-Certificate ID : {certId}
-</p>
+    {/* SIGNATURE */}
+    <div className="absolute bottom-10 w-full flex justify-between px-24">
+      <div className="text-center">
+        <div className="border-t border-gray-400 w-40"></div>
+        <p className="mt-2 text-sm text-gray-400">Director</p>
+      </div>
 
-<div className="flex justify-center mt-6">
-
-<QRCodeCanvas
-value={`http://localhost:5173/verify/${certId}`}
-size={90}
-/>
-
+      <div className="text-center">
+        <div className="border-t border-gray-400 w-40"></div>
+        <p className="mt-2 text-sm text-gray-400">HOD</p>
+      </div>
+    </div>
+  </div>
 </div>
-
-<p className="mt-2 text-sm">
-Verify : /verify/{certId}
-</p>
-
-</div>
-
-
-<div className="flex justify-between mt-16 px-20">
-
-<div className="text-center">
-<div className="border-t w-40"></div>
-<p>Director</p>
-</div>
-
-<div className="text-center">
-<div className="border-t w-40"></div>
-<p>HOD</p>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-);
-
+    </div>
+  );
 }
