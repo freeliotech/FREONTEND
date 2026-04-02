@@ -9,7 +9,7 @@ import {
   FaProjectDiagram,
   FaTimes,
 } from "react-icons/fa";
-
+import cartificate from "../../assets/cartificate.png";
 export default function InternshipDetailsSection() {
   const [openCert, setOpenCert] = useState(false);
 
@@ -340,7 +340,7 @@ export default function InternshipDetailsSection() {
               </h3>
 
               <img
-                src="https://marketplace.canva.com/EAE7srfpYAo/1/0/1600w/canva-brown-decorative-certificate-of-completion-YAwShCEKfVg.jpg"
+                src={cartificate}
                 className="mx-auto rounded-xl"
               />
             </motion.div>
