@@ -68,7 +68,7 @@ export default function ComingSoon() {
       >
         We are building something futuristic, powerful, and made just for you.
         Get ready for the next generation experience from
-        <span className="text-cyan-300 font-semibold"> FreeLioTech</span>.
+        <span className="text-cyan-300 font-semibold"> Tech Training, Innovation & Certification Hub</span>.
       </motion.p>
 
       {/* Neon Line */}

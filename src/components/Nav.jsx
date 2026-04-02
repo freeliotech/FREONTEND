@@ -28,6 +28,7 @@ import {
   FaPenNib,
   FaBezierCurve,
 } from "react-icons/fa";
+import { FaInfoCircle } from "react-icons/fa";
 import { FaBookReader } from "react-icons/fa"; // ✅ CORRECT
 import { MdLibraryBooks } from "react-icons/md";
 import { FiLogOut, FiLogIn } from "react-icons/fi";
@@ -163,7 +164,7 @@ text-3d"
                       Web Develop...
                     </Link>
                     <Link to="/services/about" className={dropItem}>
-                      <FaPalette size={ICON_SIZE} />
+                      <FaInfoCircle size={ICON_SIZE} />
                       AboutUs
                     </Link>
 
@@ -250,6 +251,7 @@ text-3d"
               onClick={() => setOpen(false)}
               className="fixed inset-0 bg-black backdrop-blur-md z-[998]"
             />
+            
 
             {/* 🚀 LEFT SIDE MENU */}
             <motion.div
@@ -314,7 +316,7 @@ text-3d"
                     ["Internship", "/internship", <FcBusiness />],
                     ["App Development", "/services/app", <FaMobileAlt />],
                     ["Web Development", "/services/web", <FaLaptopCode />],
-                    ["AboutUs", "/services/logoDesign", <FaPalette />],
+                    ["AboutUs", "/services/logoDesign", <FaInfoCircle />],
                     ["BEU Guide", "/comingsoon", <FaBookReader />],
                     ["Contact", "/contact", <FcOnlineSupport />],
                   ].map(([label, path, icon], i) => (
@@ -349,6 +351,7 @@ text-3d"
                   ))}
                 </div>
               </div>
+            
 
               {/* 🔥 FIXED LOGOUT */}
               {user && (

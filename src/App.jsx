@@ -73,9 +73,17 @@ import Cartificate_all from "./pages/admin/Cartificate_intership";
 import About_ttic from "./pages/Home"
 /* ===== Styles ===== */
 import "./styles/pyq.css";
-
+import ScrollToTop  from "./components/Scrolltop"
+import PaymentSuccess from "./Pyment/PaymentSuccess";
+import PaymentFailed from "./Pyment/PaymentFailed";
 function App() {
-return ( <Router> <Background /> <div className="relative z-10"> <CustomCursor /> <Navbar />
+return ( 
+<Router>
+   <Background /> 
+   <div className="relative z-10"> 
+    <CustomCursor /> 
+    <Navbar />
+    <ScrollToTop />
 
     <Routes>
 
@@ -162,6 +170,11 @@ return ( <Router> <Background /> <div className="relative z-10"> <CustomCursor /
       <Route path="/privacy-policy" element={<Privacy />} />
       <Route path="/rules" element={<Rules />} />
       <Route path="about" element={<About_ttic />} />
+
+
+
+        <Route path="/success" element={<PaymentSuccess />} />
+        <Route path="/failed" element={<PaymentFailed />} />
 
       {/* ===== 404 ===== */}
       <Route path="*" element={<ErrorPage />} />
