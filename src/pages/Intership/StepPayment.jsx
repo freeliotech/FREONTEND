@@ -38,7 +38,7 @@ export default function StepPayment({ utr, setUtr, setStep, applicationId }) {
       {/* QR CODE */}
 
       <img
-        src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi://pay?pa=yourupi@upi&pn=Freeliotech&am=799"
+        src="https://drive.google.com/file/d/1Gh8mH5pIrt-3KJBoL9z7iev0e66yNyyR/view?usp=drivesdk"
         alt="QR Payment"
         className="mx-auto rounded-xl"
       />

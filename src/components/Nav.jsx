@@ -94,7 +94,7 @@ export default function Nav() {
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrolled
             ? "bg-black/80 backdrop-blur-2xl py-2 shadow-lg"
-            : "bg-black/60 backdrop-blur-xl py-4"
+            : "bg-black backdrop-blur-xl py-4"
         } border-b border-cyan-500/20`}
       >
         <div className="max-w-[1600px] mx-auto px-6 flex items-center justify-between">

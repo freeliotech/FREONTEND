@@ -13,7 +13,7 @@ export default function Background() {
       <motion.div
         animate={{ scale: [1,1.3,1], opacity:[0.2,0.4,0.2] }}
         transition={{ duration:10, repeat:Infinity }}
-        className="absolute top-0 left-0 w-[450px] h-[450px] bg-cyan-500/20 blur-[200px]"
+        className="absolute top-0 left-0 w-[350px] h-[350px] bg-cyan-500/20 blur-[200px]"
       />
 
       {/* PURPLE GLOW */}
@@ -26,3 +26,5 @@ export default function Background() {
     </div>
   );
 }
+
+
