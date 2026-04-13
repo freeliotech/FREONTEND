@@ -1,0 +1,89 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+}
+
+/* BACKGROUND */
+.hero-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* OVERLAY */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+}
+
+/* CONTENT */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* TEXT BOX */
+.hero-box {
+  text-align: center;
+  max-width: 700px;
+}
+
+/* TITLE */
+.hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: white;
+  line-height: 1.2;
+}
+
+/* SUBTITLE */
+.hero-subtitle {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #ddd;
+}
+
+/* BUTTONS */
+.hero-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.hero-btn.left { left: 20px; }
+.hero-btn.right { right: 20px; }
+
+.hero-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero {
+    height: 65vh;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+}

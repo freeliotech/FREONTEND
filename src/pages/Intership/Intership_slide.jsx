@@ -59,7 +59,7 @@ export default function SimpleBlackSlider() {
   const current = slides[index];
 
   return (
-  <section className="w-full bg-trancparent text-white overflow-hidden relative pt-24 md:pt-28 pb-16">
+  <section className="w-full bg-[#1e2a3a] text-white overflow-hidden relative pt-24 md:pt-28 pb-16">
 
   <AnimatePresence mode="wait">
     <motion.div

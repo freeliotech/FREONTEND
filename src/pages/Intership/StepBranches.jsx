@@ -48,7 +48,7 @@ export default function StepBranches({ setBranch, setStep }) {
   transition={{ delay: i * 0.08 }}
   whileHover={{ y: -8, scale: 1.02 }}
   className="
-     bg-transparent border border-white/10
+     bg-[#101727] border border-white/50
     rounded-xl overflow-hidden
     hover:border-purple-500
     hover:shadow-[0_0_20px_rgba(168,85,247,0.25)]
@@ -94,19 +94,33 @@ export default function StepBranches({ setBranch, setStep }) {
     <div className="flex items-center justify-between mt-3">
 
       {/* PRICE + ICON */}
-      <div className="flex items-center gap-2 bg-[#1a1a1a] px-2 py-1 rounded-md">
+    <div className="flex items-center gap-2 bg-[#1a1a1a] px-2 py-1 rounded-md">
 
-        <img
-          src={img}
-          alt="icon"
-          className="w-4 h-4 object-contain"
-        />
+  <img
+    src={img}
+    alt="icon"
+    className="w-4 h-4 object-contain"
+  />
 
-        <span className="text-green-400 font-semibold text-sm">
-          ₹{b.price || 799}
-        </span>
+  {/* Prices */}
+  <div className="flex items-center gap-2">
+    {/* Discounted Price (50% OFF) */}
+    <span className="text-green-400 font-semibold text-sm">
+      ₹{(b.price || 799) / 2}
+    </span>
 
-      </div>
+    {/* Original Price */}
+    <span className="text-gray-400 text-xs line-through">
+      ₹{b.price || 799}
+    </span>
+
+    {/* Discount Badge */}
+    <span className="text-red-400 text-xs font-semibold">
+      50% OFF
+    </span>
+  </div>
+
+</div>
 
       {/* BUTTON */}
       <button className="
@@ -115,7 +129,7 @@ export default function StepBranches({ setBranch, setStep }) {
         hover:shadow-[0_0_10px_rgba(168,85,247,0.6)]
         transition-all duration-300
       ">
-         Apply →
+          →
       </button>
 
     </div>

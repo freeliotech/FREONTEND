@@ -44,7 +44,7 @@ export default function CertificateGenerator() {
       }
 
       const res = await axios.post(
-        `${API_BASE_URL}/certificate/create`,
+        `${API_BASE_URL}/create`,
         {
           ...form,
           certificateId: certId,

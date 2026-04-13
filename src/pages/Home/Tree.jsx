@@ -31,7 +31,10 @@ const services = [
 
 export default function FreeliotechModernSection() {
   return (
-    <section className="py-20 px-4 md:px-6 text-white">
+    <section className="py-1 px-1 md:px-6 text-white">
+        <div className="absolute top-0 left-0 w-72 h-72 bg-pink-500/10 blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-green-500/10 blur-[120px]" />
+      <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-blue-500/10 blur-[120px] -translate-x-1/2 -translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto">
 
@@ -47,7 +50,7 @@ export default function FreeliotechModernSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
               whileHover={{ scale: 1.03 }}
-              className="bg-[#0a0a0a] border border-gray-700
+              className="bg-[#101727] border border-gray-700
                          p-6 rounded-xl text-center
                          transition-all duration-300
                          hover:border-cyan-400"

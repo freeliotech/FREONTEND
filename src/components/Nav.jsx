@@ -80,10 +80,10 @@ export default function Nav() {
   const dashboardRoute = role === "admin" ? "/admin" : "/student-dashboard";
 
   const navLink =
-    "relative text-lg font-semibold text-white/90 hover:text-cyan-300 transition hover:scale-110";
+    "relative text-lg font-semibold text-[#00e172] hover:text-cyan-300 transition hover:scale-110";
 
   const dropItem =
-    "flex items-center gap-2 px-4 py-2 rounded-lg text-white/90 hover:bg-cyan-500/20 hover:text-cyan-300 transition";
+    "flex items-center gap-2 px-4 py-2 rounded-lg text-[#00e172] hover:bg-cyan-500/20 hover:text-cyan-300 transition";
 
   return (
     <>
@@ -93,8 +93,8 @@ export default function Nav() {
         animate={{ y: 0, opacity: 1 }}
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-black/80 backdrop-blur-2xl py-2 shadow-lg"
-            : "bg-black backdrop-blur-xl py-4"
+            ? "bg-[#101727] backdrop-blur-2xl py-2 shadow-lg"
+            : "bg-[#101727] backdrop-blur-xl py-4"
         } border-b border-cyan-500/20`}
       >
         <div className="max-w-[1600px] mx-auto px-6 flex items-center justify-between">
@@ -103,7 +103,7 @@ export default function Nav() {
             <motion.img
               src={logo}
               alt="TTIC Hub Logo"
-              className="h-14 w-14 object-contain"
+              className="h-16 w-16 object-contain"
               whileHover={{ scale: 1.08 }}
               transition={{ duration: 0.3 }}
             />
@@ -111,20 +111,18 @@ export default function Nav() {
             {/* TEXT CONTENT (Hidden on mobile) */}
             <div className="hidden md:flex flex-col leading-tight">
               {/* MAIN NAME */}
-              <h1
-                className="text-3xl md:text-4xl font-bold 
-bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-600 
-bg-clip-text text-transparent 
+             {/* TITLE */}
+<h1
+  className="text-4xl md:text-5xl font-extrabold 
+    bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-400
+  text-transparent bg-clip-text
+  tracking-wider
+  drop-shadow-[0_6px_15px_rgba(0,0,0,0.8)]
+  [text-shadow:1px_1px_0_rgba(255,255,255,0.1),3px_3px_8px_rgba(0,0,0,0.9)]">
+  TTICHUB
+</h1>
 
-text-3d"
-              >
-                TTICHUB
-              </h1>
 
-              {/* TAGLINE */}
-              <p className="text-[7px] text-white">
-                <i> Tech Training, Innovation & Certification Hub</i>
-              </p>
             </div>
           </Link>
           {/* ================= DESKTOP MENU ================= */}
@@ -142,7 +140,7 @@ text-3d"
               onMouseEnter={() => setMoreOpen(true)}
               onMouseLeave={() => setMoreOpen(false)}
             >
-              <button className="flex  font-bold items-center gap-1 hover:text-cyan-300 uppercase">
+              <button className="flex  font-bold items-center gap-1 text-[#00e172] hover:text-cyan-300 uppercase">
                 More {moreOpen ? <ChevronUp /> : <ChevronDown />}
               </button>
 
@@ -175,14 +173,23 @@ text-3d"
                 )}
               </AnimatePresence>
             </div>
-            <Link
-              to="/comingsoon"
-              className="px-5 py-2 rounded-xl bg-gradient-to-r
-                           from-blue-400 to-purple-500 text-black font-semibold
-                           shadow-lg hover:scale-110 transition flex items-center gap-2"
-            >
-              <FaBookReader /> BEU Guide
-            </Link>
+           <Link
+  to="/comingsoon"
+className="p-[2px] rounded-xl 
+  bg-gradient-to-r from-pink-500 via-blue-500 to-green-400 
+  inline-block shadow-lg"
+>
+  <span
+    className="px-5 py-2 rounded-xl 
+    bg-black/80 
+    text-green-400 font-semibold 
+    flex items-center gap-2 
+    transition duration-300 ease-out
+    hover:text-white "
+  >
+    <FaBookReader /> BEU Guide
+  </span>
+</Link>
 
             {/* ================= PROFILE ================= */}
             {user ? (
@@ -219,13 +226,22 @@ text-3d"
               </div>
             ) : (
               <Link
-                to="/login"
-                className="px-5 py-2 rounded-xl bg-gradient-to-r
-                           from-cyan-400 to-blue-500 text-black font-semibold
-                           shadow-lg hover:scale-110 transition flex items-center gap-2"
-              >
-                <FiLogIn /> Login
-              </Link>
+  to="/login"
+  className="p-[2px] rounded-xl 
+  bg-gradient-to-r from-pink-500 via-blue-500 to-green-400 
+  inline-block shadow-lg"
+>
+  <span
+    className="px-5 py-2 rounded-xl 
+    bg-black/80 
+    text-green-400 font-semibold 
+    flex items-center gap-2 
+    transition duration-300 ease-out
+    hover:text-white "
+  >
+    <FiLogIn /> Login
+  </span>
+</Link>
             )}
           </div>
 
@@ -249,7 +265,7 @@ text-3d"
               animate={{ opacity: 0.7 }}
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 bg-black backdrop-blur-md z-[998]"
+              className="fixed inset-0 bg-[#101727] backdrop-blur-md z-[998]"
             />
             
 
@@ -264,7 +280,7 @@ text-3d"
                 duration: 0.5,
               }}
               className="fixed top-0 left-0 h-full w-[85%] max-w-sm
-                   bg-[#05070f]/95 backdrop-blur-xl
+                   bg-[#101727] backdrop-blur-xl
                    border-r border-cyan-500/10
                    z-[999] p-6 flex flex-col"
             >
@@ -302,7 +318,7 @@ text-3d"
                       to="/login"
                       onClick={() => setOpen(false)}
                       className="px-6 py-3 rounded-xl
-                           bg-gradient-to-r from-cyan-400 to-blue-500
+                             bg-gradient-to-r from-pink-500 via-blue-500 to-green-400 
                            text-black font-semibold"
                     >
                       Login
@@ -316,37 +332,64 @@ text-3d"
                     ["Internship", "/internship", <FcBusiness />],
                     ["App Development", "/services/app", <FaMobileAlt />],
                     ["Web Development", "/services/web", <FaLaptopCode />],
-                    ["AboutUs", "/services/logoDesign", <FaInfoCircle />],
+                    ["AboutUs", "/services/about", <FaInfoCircle />],
                     ["BEU Guide", "/comingsoon", <FaBookReader />],
                     ["Contact", "/contact", <FcOnlineSupport />],
                   ].map(([label, path, icon], i) => (
-                    <motion.div
-                      key={label}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.05 }}
-                    >
-                      <Link
-                        to={path}
-                        onClick={() => setOpen(false)}
-                        className="group flex items-center gap-4 px-4 py-3 rounded-xl
-                   text-white/80 transition-all duration-300
-                   hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-blue-500/10
-                   hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(0,255,255,0.2)]"
-                      >
-                        {/* ICON */}
-                        <span className="text-xl text-cyan-400 group-hover:scale-125 transition duration-300">
-                          {icon}
-                        </span>
+  <motion.div
+    key={label}
+    initial={{ opacity: 0, x: -30 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ delay: i * 0.05 }}
+  ><Link
+  to={path}
+  onClick={() => setOpen(false)}
+  className="group rounded-xl inline-block w-full"
+>
+  <div
+    className="flex items-center gap-4 px-4 py-3 rounded-xl
+    bg-pink-500/10
+    text-green-400
+    transition-all duration-300
+   border border-blue-500/20 p-4 rounded-xl
+    
+    hover:bg-gradient-to-r hover:from-pink-500 hover:via-blue-500 hover:to-green-400
+    hover:text-white
 
-                        {/* TEXT */}
-                        <span className="tracking-wide">{label}</span>
+    active:bg-gradient-to-r active:from-pink-500 active:via-blue-500 active:to-green-400
+    active:text-white
 
-                        {/* RIGHT ARROW (HOVER ONLY) */}
-                        <span className="ml-auto opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition">
-                          →
-                        </span>
-                      </Link>
+    focus:bg-gradient-to-r focus:from-pink-500 focus:via-blue-500 focus:to-green-400
+    focus:text-white
+  "
+  >
+    
+    {/* ICON */}
+    <span className="text-xl text-green-400 
+      transition duration-300 
+      group-hover:text-white 
+      group-active:text-white">
+      {icon}
+    </span>
+
+    {/* TEXT */}
+    <span className="tracking-wide font-medium">
+      {label}
+    </span>
+
+    {/* ARROW */}
+    <span className="ml-auto opacity-0 -translate-x-1
+      group-hover:opacity-100 
+      group-active:opacity-100
+      group-hover:translate-x-1 
+      group-active:translate-x-1
+      transition duration-300">
+      →
+    </span>
+
+  </div>
+</Link>
+
                     </motion.div>
                   ))}
                 </div>

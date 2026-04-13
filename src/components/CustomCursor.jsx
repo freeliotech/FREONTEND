@@ -4,11 +4,27 @@ import { useEffect, useState } from "react";
 export default function TrailCursor() {
   const [points, setPoints] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
+    // Detect device
+    const checkDevice = () => {
+      setIsDesktop(window.innerWidth > 768 && !("ontouchstart" in window));
+    };
+
+    checkDevice();
+    window.addEventListener("resize", checkDevice);
+
+    return () => window.removeEventListener("resize", checkDevice);
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktop) return; // ❌ Stop on mobile
+
     const handleMove = (e) => {
       const pos = { x: e.clientX, y: e.clientY };
       setCursor(pos);
+
       setPoints((prev) => {
         const newPoint = {
           x: pos.x,
@@ -24,11 +40,14 @@ export default function TrailCursor() {
 
     window.addEventListener("mousemove", handleMove);
     return () => window.removeEventListener("mousemove", handleMove);
-  }, []);
+  }, [isDesktop]);
+
+  // ❌ Don't render anything on mobile
+  if (!isDesktop) return null;
 
   return (
     <>
-      {/* TRAIL POINTS (fade out) */}
+      {/* TRAIL */}
       {points.map((p) => (
         <motion.div
           key={p.id}
@@ -48,7 +67,7 @@ export default function TrailCursor() {
         />
       ))}
 
-      {/* CURRENT CURSOR POINT (always visible) */}
+      {/* CURSOR */}
       <div
         className="fixed pointer-events-none z-[9999]"
         style={{
@@ -57,7 +76,6 @@ export default function TrailCursor() {
           width: 20,
           height: 20,
           borderRadius: "50%",
-          background: "",
           boxShadow: "0 0 14px cyan",
         }}
       />

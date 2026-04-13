@@ -8,7 +8,7 @@ import {
 
 export default function HeroExactLikeImage() {
   return (
-    <section className="relative bg-[#04070d] text-white min-h-[80vh] flex items-center overflow-hidden mt-15 bottom-0">
+    <section className="relative bg-[#1e2a3a] text-white min-h-[80vh] flex items-center overflow-hidden mt-15 bottom-0">
 
       {/* Background Glow */}
 

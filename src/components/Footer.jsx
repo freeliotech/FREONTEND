@@ -8,138 +8,165 @@ import {
   FaYoutube,
   FaMapMarkerAlt,
   FaEnvelope,
-  FaHeart,
   FaWhatsapp,
 } from "react-icons/fa";
 
-/* ---------------- ANIMATION ---------------- */
+/* ANIMATION */
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.1,
-      duration: 0.6,
-      ease: "easeOut",
+      delay: i * 0.08,
+      duration: 0.5,
     },
   }),
 };
 
 export default function Footer() {
   const socials = [
-    { Icon: FaFacebookF, link: "https://www.facebook.com/people/Tech-Training-innovation-Cartification-Hub/61576121840140/?rdid=fuRWg9xGfwmV47u9&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F184mrVvWrq%2F", color: "text-blue-500" },
-    { Icon: FaInstagram, link: "https://www.instagram.com/ttichub?utm_source=qr", color: "text-pink-500" },
-    { Icon: FaYoutube, link: "https://youtube.com/@ttichub?si=WS_hLLNNfn5xh4Wx", color: "text-red-500" },
-    { Icon: FaLinkedinIn, link: "https://www.linkedin.com/company/freeliotech/", color: "text-sky-500" },
-    { Icon: FaWhatsapp, link: "Follow the Tech Training Innovation & Cartification Hub channel on WhatsApp: https://whatsapp.com/channel/0029Vb7evq96buMMbol85M1a", color: "text-green-500" },
+    { Icon: FaFacebookF, color: "hover:text-blue-400" },
+    { Icon: FaInstagram, color: "hover:text-pink-400" },
+    { Icon: FaYoutube, color: "hover:text-red-400" },
+    { Icon: FaLinkedinIn, color: "hover:text-sky-400" },
+    { Icon: FaWhatsapp, color: "hover:text-green-400" },
   ];
 
   return (
-    <footer className="relative bg-black to green text-gray-400 overflow-hidden">
+    <footer className="relative w-full 
+    bg-gradient-to-br from-[#050816] via-[#0b1220] to-[#020617]
+    text-gray-400 overflow-hidden">
 
-      {/* TOP BORDER */}
-      <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent" />
+      {/* 🌈 TOP LINE */}
+      <div className="absolute top-0 w-full h-[2px] 
+      bg-gradient-to-r from-pink-500 via-blue-500 to-green-400" />
 
+      {/* ✨ SOFT GLOW */}
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-pink-500/10 blur-[120px]" />
+      <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-green-500/10 blur-[120px]" />
 
-
-      {/* 🔥 GLOW BACKGROUND */}
-      <div className="absolute -top-40 -left-40 w-[400px] h-[400px] bg-cyan-500/10 blur-[200px]" />
-      <div className="absolute -bottom-40 -right-40 w-[400px] h-[400px] bg-purple-500/10 blur-[220px]" />
-
-      {/* MAIN */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-14">
 
         {/* GRID */}
         <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
 
-          {/* COMPANY */}
-          <motion.div className="relative" variants={fadeUp} initial="hidden" whileInView="visible">
-            <h1 className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-600 bg-clip-text text-transparent">
-              TTICHUB
-            </h1>
+          {/* 🔥 COMPANY */}
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible">
 
-            <p className="mt-3 text-xs sm:text-sm leading-relaxed">
-              Tech Training, Innovation & Certification Hub providing industry-ready skills and internships.
-            </p>
+            {/* LOGO */}
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl font-extrabold tracking-wider relative inline-block"
+            >
+              <span className="bg-gradient-to-r from-pink-500 via-blue-500 to-green-400 bg-clip-text text-transparent">
+                TTICHUB
+              </span>
 
-            <span className="hidden lg:block absolute right-[-20px] top-0 h-full w-[1px] bg-white/10"></span>
+              {/* Glow */}
+              <span className="absolute inset-0 
+              bg-gradient-to-r from-pink-500 via-blue-500 to-green-400 
+              blur-xl opacity-20 -z-10" />
+            </motion.h1>
+
+            {/* TAGLINE */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="mt-4 text-sm leading-relaxed text-gray-400/90"
+            >
+              Tech Training, Innovation & Certification Hub providing{" "}
+              <span className="text-white">industry-ready skills</span>,{" "}
+              <span className="text-blue-400">internships</span> &{" "}
+              <span className="text-green-400">career growth</span>.
+            </motion.p>
+
+            {/* LINE */}
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "70px" }}
+              transition={{ duration: 0.6 }}
+              className="mt-4 h-[2px] 
+              bg-gradient-to-r from-pink-500 via-blue-500 to-green-400 
+              rounded-full"
+            />
+
           </motion.div>
 
           {/* CONTACT */}
-          <motion.div className="relative" variants={fadeUp} custom={1}>
-            <h3 className="text-white font-semibold text-lg mb-4">Contact</h3>
+          <motion.div variants={fadeUp} custom={1}>
+            <h3 className="text-white font-semibold mb-4">Contact</h3>
 
             <ul className="space-y-3 text-sm">
-              <li className="flex gap-2 hover:text-white hover:translate-x-1 transition">
-                <FaMapMarkerAlt className="text-cyan-400" />
+              <li className="flex gap-2">
+                <FaMapMarkerAlt className="text-green-400 mt-1" />
                 Bihar, India
               </li>
 
-              <li>
-               <motion.a
-  href="https://wa.me/918292928328"
-  target="_blank"
-  whileHover={{ scale: 1.05 }}
-  className="flex items-center gap-2 text-white"
->
-  <FaWhatsapp className="text-green-500 text-lg" />
-  <span className="text-white/50    hover:text-white">WhatsApp</span>
-</motion.a>
-                  
+              <li className="flex gap-2">
+                <FaWhatsapp className="text-green-500 mt-1" />
+                WhatsApp Support
               </li>
 
-              <li className="flex gap-2 hover:text-white hover:translate-x-1 transition">
-                <FaEnvelope className="text-cyan-400" />
+              <li className="flex gap-2">
+                <FaEnvelope className="text-blue-400 mt-1" />
                 admin@ttichub.co.in
               </li>
             </ul>
+          </motion.div>
 
-            <span className="hidden lg:block absolute right-[-20px] top-0 h-full w-[1px] bg-white/10"></span>
+          {/* LINKS */}
+          <motion.div variants={fadeUp} custom={2}>
+            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+
+            <ul className="space-y-2 text-sm">
+              {["Home", "About", "Courses", "Internship"].map((item, i) => (
+                <li key={i}>
+                  <Link
+                    to="/"
+                    className="relative inline-block group hover:text-white transition"
+                  >
+                    {item}
+
+                    {/* UNDERLINE */}
+                    <span className="absolute left-0 -bottom-1 w-0 h-[2px] 
+                    bg-gradient-to-r from-pink-500 via-blue-500 to-green-400
+                    transition-all duration-300 group-hover:w-full" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </motion.div>
 
           {/* LEGAL */}
-          <motion.div className="relative" variants={fadeUp} custom={2}>
-            <h3 className="text-white font-semibold text-lg mb-4">Legal</h3>
+          <motion.div variants={fadeUp} custom={3}>
+            <h3 className="text-white font-semibold mb-4">Legal</h3>
 
             <ul className="space-y-2 text-sm">
-              <li><Link to="/rules" className="hover:text-white hover:translate-x-1 transition">Rules</Link></li>
-              <li><Link to="/terms" className="hover:text-white hover:translate-x-1 transition">Terms</Link></li>
-              <li><Link to="/privacy-policy" className="hover:text-white hover:translate-x-1 transition">Privacy</Link></li>
+              <li><Link to="/rules" className="hover:text-blue-400">Rules</Link></li>
+              <li><Link to="/terms" className="hover:text-blue-400">Terms</Link></li>
+              <li><Link to="/privacy-policy" className="hover:text-blue-400">Privacy</Link></li>
             </ul>
-
-            <span className="hidden lg:block absolute right-[-20px] top-0 h-full w-[1px] bg-white/10"></span>
-          </motion.div>
-
-          {/* IMPORTANT */}
-          <motion.div className="relative" variants={fadeUp} custom={3}>
-            <h3 className="text-white font-semibold text-lg mb-4">Important</h3>
-
-            <ul className="space-y-2 text-sm">
-              <li><Link to="/" className="hover:text-white hover:translate-x-1 transition">Home</Link></li>
-               <li><Link to="/about" className="hover:text-white hover:translate-x-1 transition">AboutUs</Link></li>
-              <li><Link to="/courses" className="hover:text-white hover:translate-x-1 transition">Courses</Link></li>
-              <li><Link to="/internship" className="hover:text-white hover:translate-x-1 transition">Internship</Link></li>
-            </ul>
-
-            <span className="hidden lg:block absolute right-[-20px] top-0 h-full w-[1px] bg-white/10"></span>
           </motion.div>
 
           {/* SOCIAL */}
           <motion.div variants={fadeUp} custom={4}>
-            <h3 className="text-white font-semibold text-lg mb-4">Connect</h3>
+            <h3 className="text-white font-semibold mb-4">Connect</h3>
 
             <div className="flex gap-3">
-              {socials.map(({ Icon, link, color }, i) => (
-                <motion.a
+              {socials.map(({ Icon, color }, i) => (
+                <motion.div
                   key={i}
-                  href={link}
-                  target="_blank"
-                  whileHover={{ y: -4, scale: 1.1 }}
-                  className={`w-9 h-9 flex items-center justify-center rounded-full border border-white/20 bg-white/5 ${color}`}
+                  whileHover={{ scale: 1.1 }}
+                  className={`w-9 h-9 flex items-center justify-center 
+                  rounded-full border border-white/10 bg-white/5 
+                  text-gray-300 ${color}`}
                 >
                   <Icon size={14} />
-                </motion.a>
+                </motion.div>
               ))}
             </div>
           </motion.div>
@@ -147,9 +174,13 @@ export default function Footer() {
         </div>
 
         {/* BOTTOM */}
-        <div className="mt-10 border-t border-white/10 pt-4 text-center text-xs text-gray-500">
-          © {new Date().getFullYear()} TTICHUB ❤️ All rights reserved.
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="mt-10 border-t border-white/10 pt-4 text-center text-xs text-gray-500"
+        >
+          © {new Date().getFullYear()} TTICHUB • All rights reserved
+        </motion.div>
 
       </div>
     </footer>

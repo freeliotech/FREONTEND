@@ -18,7 +18,7 @@ export default function Courses() {
   };
 
   return (
-    <section className="bg-[#04070d] text-white py-14 px-4">
+    <section className="bg-[#1e2a3a] text-white py-14 px-4">
       
       {/* TOP SLIDER */}
       <Courses_slide />
@@ -31,8 +31,8 @@ export default function Courses() {
             onClick={() => window.open(c.courseLink, "_blank")}
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
-            className="group rounded-lg border border-[#1a1f2b] 
-                       bg-[#0b0f17] p-4 cursor-pointer 
+            className="group rounded-lg border border-white/50 
+                       bg-[#101727] p-4 cursor-pointer 
                        transition-all duration-300
                        hover:border-purple-500 
                        hover:bg-[#101522]
@@ -77,7 +77,8 @@ export default function Courses() {
               className="mt-3 w-full text-xs py-2 rounded-md 
                          bg-[#151a24] text-gray-300 
                          hover:bg-purple-600 hover:text-white 
-                         transition"
+                         transition
+                         border-white/50"
             >
               Explore
             </button>

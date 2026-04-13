@@ -21,9 +21,6 @@ function Home() {
       {/* Hero Slider */}
       <Slide />
       <Hero />
-
-    
-
       {/* BEU Section */}
      
       {/* We Provide */}

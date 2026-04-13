@@ -17,7 +17,7 @@ export default function InternshipFlow() {
 
   return (
 
-    <section className="min-h-screen bg-transparent text-white px-6 py-28">
+    <section className="min-h-screen bg-[#1e2a3a] text-white px-6 py-28">
 
       {step === 0 && (
         <StepBranches setBranch={setBranch} setStep={setStep} />

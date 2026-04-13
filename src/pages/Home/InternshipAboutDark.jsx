@@ -9,10 +9,6 @@ import {
   FaUserGraduate,
   FaHandsHelping,
   FaUsers,
-  FaCode,
-  FaMobileAlt,
-  FaCloud,
-  FaPalette
 } from "react-icons/fa";
 
 /* ================= ANIMATION ================= */
@@ -28,133 +24,120 @@ const fadeUp = {
 
 export default function InternshipAboutDark() {
   return (
-    <section className="relative min-h-screen bg-black text-gray-300 px-6 py-24 font-[Poppins] overflow-hidden">
+    <section className="relative min-h-screen text-gray-300 px-0 py-0 overflow-hidden">
 
-      {/* GRID BACKGROUND */}
+      {/* 🌈 BACKGROUND */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-pink-500/20 blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-500/20 blur-[120px]" />
 
-      <div className="absolute inset-0 opacity-[0.04]
-      bg-[linear-gradient(#ffffff_1px,transparent_1px),linear-gradient(90deg,#ffffff_1px,transparent_1px)]
-      bg-[size:40px_40px]" />
+      {/* ================= HERO ================= */}
 
-      {/* GLOW EFFECT */}
+      <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
 
-      <motion.div
-        animate={{ scale: [1, 1.3, 1], opacity: [0.25, 0.45, 0.25] }}
-        transition={{ duration: 9, repeat: Infinity }}
-        className="absolute top-0 left-0 w-[420px] h-[420px] bg-cyan-500/20 blur-[180px]"
-      />
-
-      <motion.div
-        animate={{ scale: [1, 1.4, 1], opacity: [0.25, 0.5, 0.25] }}
-        transition={{ duration: 11, repeat: Infinity }}
-        className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-purple-500/20 blur-[200px]"
-      />
-
-      {/* ================= HERO CONTENT ================= */}
-
-      <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-
-        {/* LEFT TEXT */}
-
+        {/* LEFT */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true }}
-          className="space-y-7"
+          className="space-y-6"
         >
 
-      
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            Internship Program 🚀
+          </h2>
 
-          <p className="text-gray-400 text-lg leading-relaxed">
-            Gain real-world experience by working on industry-level projects.
-            Our internship program focuses on practical learning, mentorship,
-            and career growth in modern technologies like Web Development,
-            Cloud Computing and Mobile Apps.
+          <p className="text-gray-400 text-base md:text-lg leading-relaxed">
+            Gain real-world experience through industry-level projects,
+            mentorship, and hands-on learning in Web Development,
+            Cloud Computing, and Mobile Apps.
           </p>
 
           {/* FEATURES */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
-          <div className="space-y-4">
-
-            <Feature icon={<FaLaptopCode />} text="Work on real industry projects" />
-            <Feature icon={<FaChalkboardTeacher />} text="Guidance from expert mentors" />
-            <Feature icon={<FaBrain />} text="Skill-based practical learning" />
-            <Feature icon={<FaGlobe />} text="Industry exposure & teamwork" />
-            <Feature icon={<FaChartLine />} text="Career focused training" />
-            <Feature icon={<FaCertificate />} text="Verified internship certificate" />
+            <Feature icon={<FaLaptopCode />} text="Real Industry Projects" />
+            <Feature icon={<FaChalkboardTeacher />} text="Expert Mentorship" />
+            <Feature icon={<FaBrain />} text="Practical Learning" />
+            <Feature icon={<FaGlobe />} text="Team Collaboration" />
+            <Feature icon={<FaChartLine />} text="Career Growth" />
+            <Feature icon={<FaCertificate />} text="Verified Certificate" />
 
           </div>
 
+          {/* BUTTON */}
           <motion.button
-            whileHover={{ scale: 1.07 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-6 px-7 py-3 bg-cyan-400 text-black font-semibold rounded-lg
-            shadow-[0_0_25px_rgba(0,255,255,0.5)]"
+            whileHover={{ scale: 1.05 }}
+            className="mt-4 px-6 py-3 rounded-full 
+            bg-gradient-to-r from-pink-500 via-blue-500 to-green-400
+            text-white font-semibold shadow-md"
           >
             Explore Internship
           </motion.button>
 
         </motion.div>
 
-
         {/* RIGHT IMAGE */}
-
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7 }}
           className="flex justify-center"
         >
-
           <motion.img
             src="https://apply.virtunexa.com/wp-content/uploads/2024/06/54.png"
             alt="Internship"
-            animate={{ y: [0, -15, 0] }}
+            animate={{ y: [0, -10, 0] }}
             transition={{ duration: 5, repeat: Infinity }}
-            className="w-[85%] max-w-md drop-shadow-[0_0_45px_rgba(0,255,255,0.3)]"
+            className="w-[85%] max-w-md"
           />
-
         </motion.div>
 
       </div>
 
+      {/* ================= CARDS ================= */}
 
-      {/* ================= INTERNSHIP BENEFITS ================= */}
-
-      <div className="relative z-10 max-w-7xl mx-auto mt-28
-      grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="relative z-10 max-w-7xl mx-auto mt-20
+      grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
         {cards.map((c, i) => (
 
           <motion.div
             key={i}
             variants={fadeUp}
-            whileHover={{ scale: 1.05 }}
-            className="h-full flex flex-col justify-between
-            bg-black
-            border border-cyan-500/20
-            rounded-2xl p-7
-            hover:border-cyan-400
-            hover:shadow-[0_0_35px_rgba(0,255,255,0.35)]
-            transition"
+            whileHover={{ y: -6 }}
+            className="bg-white/5 backdrop-blur-md border border-white/10
+            rounded-xl p-6 transition duration-300
+            hover:bg-white/10 hover:border-white/20"
           >
 
-            <div>
-
-              <div className="text-3xl text-cyan-400 mb-4">
-                {c.icon}
-              </div>
-
-              <h3 className="text-lg font-semibold text-white mb-2">
-                {c.title}
-              </h3>
-
-              <p className="text-sm text-gray-400">
-                {c.desc}
-              </p>
-
+            {/* ICON */}
+            <div className={`
+              w-12 h-12 flex items-center justify-center 
+              rounded-lg mb-4 text-xl
+              
+              ${i === 0 && "bg-green-500/10 text-green-400"}
+              ${i === 1 && "bg-blue-500/10 text-blue-400"}
+              ${i === 2 && "bg-pink-500/10 text-pink-400"}
+              ${i === 3 && "bg-yellow-500/10 text-yellow-400"}
+              ${i === 4 && "bg-purple-500/10 text-purple-400"}
+              ${i === 5 && "bg-cyan-500/10 text-cyan-400"}
+            `}>
+              {c.icon}
             </div>
+
+            {/* TITLE */}
+            <h3 className="text-lg font-semibold text-white">
+              {c.title}
+            </h3>
+
+            {/* SUBTITLE */}
+            <p className="text-xs text-gray-500 mt-1">
+              {c.subtitle}
+            </p>
+
+            {/* DESC */}
+            <p className="text-sm text-gray-400 mt-3 leading-relaxed">
+              {c.desc}
+            </p>
 
           </motion.div>
 
@@ -162,102 +145,58 @@ export default function InternshipAboutDark() {
 
       </div>
 
-
-      {/* ================= TRAINING SERVICES ================= */}
-
-      
     </section>
   );
 }
 
-/* ================= FEATURE ITEM ================= */
+/* ================= FEATURE ================= */
 
 function Feature({ icon, text }) {
-
   return (
-
-    <div className="flex items-center gap-4 text-gray-400 hover:text-cyan-300 transition">
-
-      <span className="text-cyan-400 text-xl">{icon}</span>
-
-      <span>{text}</span>
-
+    <div className="flex items-center gap-3 text-sm text-gray-400 hover:text-white transition">
+      <span className="text-cyan-400">{icon}</span>
+      {text}
     </div>
-
   );
-
 }
 
-
-/* ================= CARD DATA ================= */
+/* ================= DATA ================= */
 
 const cards = [
-
   {
     title: "Immersive Onboarding",
-    desc: "Understand company workflow, tools and development process from day one.",
+    subtitle: "Start with real workflow",
+    desc: "Understand tools, workflow and real development process.",
     icon: <FaUserGraduate />
   },
-
   {
     title: "Hands-on Learning",
-    desc: "Build real world applications instead of just theoretical learning.",
+    subtitle: "Build real projects",
+    desc: "Build real applications instead of theory-based learning.",
     icon: <FaHandsHelping />
   },
-
   {
     title: "Expert Mentorship",
-    desc: "Learn directly from experienced developers and industry mentors.",
+    subtitle: "Learn from professionals",
+    desc: "Get guidance from experienced developers.",
     icon: <FaChalkboardTeacher />
   },
-
   {
     title: "Team Collaboration",
-    desc: "Work in teams and learn real software development collaboration.",
+    subtitle: "Work like companies",
+    desc: "Collaborate in teams and learn real development flow.",
     icon: <FaUsers />
   },
-
   {
     title: "Career Growth",
-    desc: "Build a strong portfolio that helps you land internships and jobs.",
+    subtitle: "Become job ready",
+    desc: "Build portfolio and improve career opportunities.",
     icon: <FaChartLine />
   },
-
   {
-    title: "Verified Certification",
-    desc: "Receive professional internship certificate after successful completion.",
+    title: "Certification",
+    subtitle: "Verified credentials",
+    desc: "Get professional internship certification.",
     icon: <FaCertificate />
   }
-
-];
-
-
-/* ================= SERVICES DATA ================= */
-
-const services = [
-
-  {
-    icon: <FaCode />,
-    title: "Full Stack Development",
-    text: "Learn MERN stack development including React, Node.js and MongoDB."
-  },
-
-  {
-    icon: <FaMobileAlt />,
-    title: "Mobile App Development",
-    text: "Build Android and cross-platform mobile apps using modern frameworks."
-  },
-
-  {
-    icon: <FaCloud />,
-    title: "Cloud & Deployment",
-    text: "Deploy applications on cloud platforms and learn DevOps basics."
-  },
-
-  {
-    icon: <FaPalette />,
-    title: "UI / UX Design",
-    text: "Design beautiful responsive interfaces using Tailwind CSS."
-  }
-
 ];

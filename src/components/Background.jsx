@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function Background() {
   return (
-    <div className="fixed inset-0 -z-10 bg-black overflow-hidden">
+    <div className="fixed inset-0 -z-10 bg-[#111828] overflow-hidden">
 
       {/* GRID */}
       <div className="absolute inset-0 opacity-[0.04]

@@ -138,7 +138,7 @@ export default function LoginSignup() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden px-4">
+    <section className="relative min-h-screen flex items-center justify-center bg-[#1e2a3a] overflow-hidden px-4">
       {/* 3D MULTICOLOR BACKGROUND */}
 
       <div className="absolute inset-0 overflow-hidden">
