@@ -3,7 +3,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const API = "https://backend-production-7a212.up.railway.app/api";
+const API = "https://backendttichub-production.up.railway.app/api";
 
 export default function ApplyInternship() {
 
