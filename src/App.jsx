@@ -76,6 +76,7 @@ import "./styles/pyq.css";
 import ScrollToTop  from "./components/Scrolltop"
 import PaymentSuccess from "./Pyment/PaymentSuccess";
 import PaymentFailed from "./Pyment/PaymentFailed";
+import KrishiRent from "./pages/krishi/KrishiRent";
 function App() {
 return ( 
 <Router>
@@ -95,6 +96,7 @@ return (
       <Route path="/comingsoon" element={<ComingSoon />} />
       <Route path="/developer" element={<Developer />} />
       <Route path="/courses" element={<Course />} />
+      <Route path="/krishirent" element={<KrishiRent />} />
 
       <Route path="/chatbot" element={<ChatWidget />} />
       <Route path="/college" element={<Collage />} />
