@@ -15,6 +15,7 @@ import Tree from "./Home/Tree.jsx";
 import About from "./Home/About.jsx";
 import InternshipAboutDark  from "./Home/InternshipAboutDark.jsx";
 import WeProvide from "./Home/WeProvide.jsx";
+import OurMission from "./Home/vision.jsx";
 function Home() {
   return (
     <>
@@ -37,7 +38,8 @@ function Home() {
       {/* Services */}
   
       {/* Tree Section */}
-      <Tree />
+
+      <OurMission />
 
 
 

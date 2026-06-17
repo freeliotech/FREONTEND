@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+const API = "http://localhost:5000/api";
 
-const API = "https://backend-production-7a212.up.railway.app/api";
 
 export default function AdminPanel() {
   const [applications, setApplications] = useState([]);

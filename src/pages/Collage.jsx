@@ -3,7 +3,7 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ================= BASE URL ================= */
-const BASE_URL = "https://backend-production-7a212.up.railway.app";
+const BASE_URL = "https://sanujbackendttic.up.railway.app";
 
 export default function CollegeSection() {
   const [colleges, setColleges] = useState([]);

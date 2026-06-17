@@ -1,226 +1,103 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  FaComments,
   FaMicrophone,
   FaPaperPlane,
   FaRobot,
   FaTrash,
   FaVolumeUp,
+  FaTimes,
+  FaArrowRight,
+  FaGraduationCap,
+  FaLaptopCode,
+  FaCertificate,
+  FaShieldAlt,
 } from "react-icons/fa";
 
 const STORAGE_KEY = "ttic-chat-history";
 
 const DEFAULT_MESSAGE = {
-  id: "welcome-message",
+  id: "welcome",
   from: "bot",
-  text: "Welcome to TTIC Hub. I can help with courses, internships, certificates, fees, and support.",
+  text: "👋 Hi! I'm your TTIC Assistant. I can help with:\n• Courses & Training\n• Internships\n• Fees & Payments\n• Certificates\n• Technical Support\nHow can I assist you today?",
   time: "Now",
 };
 
+// Extended FAQ with rich answers
 const FAQ = [
-  {
-    q: ["hello", "hi", "hey", "good morning", "good evening"],
-    a: "Hello. Welcome to TTIC Hub. How can I help you today?",
-  },
-  {
-    q: ["course", "training", "program"],
-    a: "We offer training in Full Stack Development, AI, Machine Learning, Cyber Security, Data Science, and more.",
-  },
-  {
-    q: ["internship", "internships"],
-    a: "Internships are available in Web Development, MERN Stack, Python, and AI with project-based learning.",
-  },
-  {
-    q: ["fees", "fee", "price", "cost"],
-    a: "Most training programs are budget-friendly and usually range between Rs. 499 and Rs. 799.",
-  },
-  {
-    q: ["certificate", "certification"],
-    a: "After successful completion, you receive a verified digital certificate with a unique verification ID.",
-  },
-  {
-    q: ["python"],
-    a: "Yes, we provide Python programming training with practical exercises and projects.",
-  },
-  {
-    q: ["react"],
-    a: "React training is included in our Full Stack Development track.",
-  },
-  {
-    q: ["mern"],
-    a: "Our MERN stack training covers MongoDB, Express, React, and Node.js.",
-  },
-  {
-    q: ["ai", "artificial intelligence"],
-    a: "Artificial Intelligence training is available with practical, industry-focused modules.",
-  },
-  {
-    q: ["data science"],
-    a: "Yes, we offer Data Science training with project work and hands-on learning.",
-  },
-  {
-    q: ["cyber security", "cybersecurity"],
-    a: "Cyber Security training is available for students interested in security fundamentals and tools.",
-  },
-  {
-    q: ["web development", "full stack"],
-    a: "We offer Full Stack Web Development training with frontend, backend, and deployment concepts.",
-  },
-  {
-    q: ["duration", "how long", "months"],
-    a: "Most courses run for around 1 to 3 months depending on the program.",
-  },
-  {
-    q: ["online", "remote class", "live class", "live classes"],
-    a: "Yes, all major courses are available online, including live training sessions.",
-  },
-  {
-    q: ["internship duration"],
-    a: "Internship duration is usually 1 to 2 months.",
-  },
-  {
-    q: ["remote internship", "work from home internship"],
-    a: "Yes, internships are remote-friendly and can be completed online.",
-  },
-  {
-    q: ["project", "projects", "portfolio"],
-    a: "You will work on real-world projects that help build a strong portfolio.",
-  },
-  {
-    q: ["experience letter"],
-    a: "Yes, an experience letter is provided after successful internship completion.",
-  },
-  {
-    q: ["internship certificate"],
-    a: "Yes, a verified internship certificate is provided.",
-  },
-  {
-    q: ["payment", "pay", "upi", "debit card", "credit card"],
-    a: "Payments can be made via UPI, debit card, or credit card.",
-  },
-  {
-    q: ["refund"],
-    a: "Fees are generally non-refundable. Please confirm details before payment.",
-  },
-  {
-    q: ["discount", "offer", "offers"],
-    a: "Discounts may be available during special promotions or campaigns.",
-  },
-  {
-    q: ["invoice", "receipt"],
-    a: "A payment receipt or invoice is provided after successful payment.",
-  },
-  {
-    q: ["register", "registration", "enroll", "enrollment"],
-    a: "You can register through the website registration page and follow the enrollment process there.",
-  },
-  {
-    q: ["login", "sign in"],
-    a: "Use your registered email and password to log in to your account.",
-  },
-  {
-    q: ["forgot password", "reset password"],
-    a: "Use the forgot password option on the login page to reset your password.",
-  },
-  {
-    q: ["dashboard"],
-    a: "After login, your student dashboard shows your courses, certificates, and learning details.",
-  },
-  {
-    q: ["profile", "account settings"],
-    a: "You can update your profile from the dashboard settings section.",
-  },
-  {
-    q: ["download certificate"],
-    a: "Certificates can be downloaded directly from your student dashboard.",
-  },
-  {
-    q: ["certificate id", "verification id", "verify certificate", "qr certificate"],
-    a: "Each certificate includes a unique verification ID and QR-based verification support.",
-  },
-  {
-    q: ["javascript", "node", "express", "mongodb", "api"],
-    a: "We cover modern web technologies like JavaScript, Node.js, Express.js, MongoDB, and API development.",
-  },
-  {
-    q: ["support", "contact", "email", "help"],
-    a: "Our support team is available at support@freeliotech.in for help with courses, internships, certificates, and account issues.",
-  },
-  {
-    q: ["mentor", "mentors"],
-    a: "Expert mentors guide learners throughout training and internship programs.",
-  },
-  {
-    q: ["job", "jobs", "placement"],
-    a: "Our programs are designed to improve skills, strengthen portfolios, and support job readiness.",
-  },
-  {
-    q: ["thank", "thanks"],
-    a: "You are welcome. Happy learning.",
-  },
+  { keywords: ["hello", "hi", "hey"], answer: "Hello! Welcome to TTIC Hub. Need help with courses, internships, or anything else?" },
+  { keywords: ["courses", "training", "program", "learn"], answer: "🎓 We offer: Full Stack Dev, AI/ML, Cyber Security, Data Science, Cloud Computing, UI/UX Design. All include live projects & certificate. Which one interests you?" },
+  { keywords: ["internship", "internships"], answer: "💼 Internships available: Web Dev (MERN), Python, AI, Cyber Security. Duration: 1-2 months. Remote, with experience letter & certificate. Want more details?" },
+  { keywords: ["fees", "fee", "price", "cost", "payment"], answer: "💰 Most courses: ₹499 - ₹799. Payments via UPI, card, net banking. Discounts available for group registrations. Need specific course pricing?" },
+  { keywords: ["certificate", "certification"], answer: "📜 You get a verified digital certificate with unique QR code & verification ID after course/internship completion. Download from dashboard." },
+  { keywords: ["python"], answer: "🐍 Python training: Basics to advanced, data structures, OOP, and projects. Duration: 2 months. Enroll now!" },
+  { keywords: ["react", "reactjs"], answer: "⚛️ React is part of Full Stack Web Dev course. Learn hooks, state, router, context API, and build real apps." },
+  { keywords: ["mern", "full stack"], answer: "🌐 MERN Stack: MongoDB, Express, React, Node.js. Build full‑stack apps. Course includes 5+ projects." },
+  { keywords: ["ai", "artificial intelligence", "machine learning", "ml"], answer: "🤖 AI/ML course: Python, Pandas, Scikit‑learn, TensorFlow, real‑world projects. Duration: 3 months." },
+  { keywords: ["data science"], answer: "📊 Data Science: Python, SQL, statistics, data visualization, machine learning. Portfolio projects included." },
+  { keywords: ["cyber security", "cybersecurity"], answer: "🔒 Cyber Security: Network security, ethical hacking, cryptography, risk management. Hands‑on labs." },
+  { keywords: ["cloud", "aws", "azure", "cloud computing"], answer: "☁️ Cloud Computing: AWS, Azure, deployment, serverless, DevOps basics. Practical training." },
+  { keywords: ["web development"], answer: "💻 Web Development: HTML, CSS, JS, React, Node.js, MongoDB. Build responsive websites." },
+  { keywords: ["duration", "how long", "months"], answer: "⏱️ Most courses: 1‑3 months. Internships: 1‑2 months. Self‑paced options available." },
+  { keywords: ["online", "live class", "remote"], answer: "💻 All courses online with live instructor sessions + recorded videos." },
+  { keywords: ["project", "projects", "portfolio"], answer: "🛠️ Real‑world projects: e‑commerce, dashboard, AI model, security audit – add to your portfolio." },
+  { keywords: ["experience letter"], answer: "✉️ Yes, experience letter provided after completing internship with performance review." },
+  { keywords: ["refund", "refund policy"], answer: "⚠️ Fees are non‑refundable. Please confirm all details before payment. Demo classes available." },
+  { keywords: ["discount", "offer", "scholarship"], answer: "🎁 Seasonal discounts & referral offers active. Contact support for current deals." },
+  { keywords: ["register", "enroll", "signup"], answer: "📝 Register through the website registration form. Fill details, choose course, pay fees, and start learning." },
+  { keywords: ["login", "sign in"], answer: "🔐 Use your registered email & password to login. Dashboard shows your courses, certificates, progress." },
+  { keywords: ["forgot password", "reset password"], answer: "🔑 Click 'Forgot Password' on login page – reset link sent to your email." },
+  { keywords: ["dashboard"], answer: "📊 Student dashboard: view enrolled courses, download certificates, track projects, access support." },
+  { keywords: ["profile", "update profile"], answer: "👤 Go to Dashboard → Settings → Update profile, change password, upload photo." },
+  { keywords: ["download certificate", "get certificate"], answer: "📄 After course completion, certificate appears in your dashboard. Click 'Download'." },
+  { keywords: ["verify certificate", "certificate id"], answer: "✅ Each certificate has a unique ID & QR code. Anyone can verify using the verification page." },
+  { keywords: ["javascript", "node.js", "express", "mongodb"], answer: "⚡ We cover JS, Node, Express, MongoDB in Full Stack & Backend courses. Real APIs." },
+  { keywords: ["support", "contact", "email", "help"], answer: "📧 Email support@freeliotech.in. Response within 24h. Also chat with us here!" },
+  { keywords: ["mentor", "mentorship"], answer: "👨‍🏫 Industry experts mentor you through projects, code reviews, and career guidance." },
+  { keywords: ["job", "placement", "career"], answer: "🎯 Resume building, interview prep, LinkedIn optimization. We help you get job‑ready." },
+  { keywords: ["thank", "thanks", "appreciate"], answer: "🙏 You're welcome! Keep learning. Is there anything else I can help with?" },
 ];
 
 const QUICK_ACTIONS = [
-  "Courses",
-  "Internship",
-  "Fees",
-  "Certificate",
-  "Support",
+  { label: "Courses", icon: <FaLaptopCode /> },
+  { label: "Internship", icon: <FaArrowRight /> },
+  { label: "Fees", icon: <FaCertificate /> },
+  { label: "Certificate", icon: <FaGraduationCap /> },
+  { label: "Support", icon: <FaShieldAlt /> },
 ];
 
-const getCurrentTime = () =>
-  new Date().toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+const getCurrentTime = () => new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
 const createMessage = (from, text) => ({
-  id: `${from}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+  id: `${from}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
   from,
   text,
   time: getCurrentTime(),
 });
 
-const normalizeText = (value) => value.toLowerCase().replace(/[^\w\s]/g, " ");
+const normalizeText = (text) => text.toLowerCase().replace(/[^\w\s]/g, " ");
 
-const getBestReply = (input) => {
-  const normalizedInput = normalizeText(input);
-  const words = normalizedInput.split(/\s+/).filter(Boolean);
-
-  let bestMatch = null;
+const getBotReply = (userInput) => {
+  const normalized = normalizeText(userInput);
+  const words = normalized.split(/\s+/).filter(Boolean);
+  let best = null;
   let bestScore = 0;
 
   FAQ.forEach((item) => {
-    const score = item.q.reduce((total, keyword) => {
-      const normalizedKeyword = normalizeText(keyword).trim();
-
-      if (!normalizedKeyword) {
-        return total;
-      }
-
-      if (normalizedInput.includes(normalizedKeyword)) {
-        return total + normalizedKeyword.split(" ").length + 2;
-      }
-
-      if (words.includes(normalizedKeyword)) {
-        return total + 1;
-      }
-
-      return total;
-    }, 0);
-
+    let score = 0;
+    item.keywords.forEach((kw) => {
+      const normKw = normalizeText(kw);
+      if (normalized.includes(normKw)) score += normKw.split(" ").length + 3;
+      else if (words.includes(normKw)) score += 1;
+    });
     if (score > bestScore) {
       bestScore = score;
-      bestMatch = item;
+      best = item;
     }
   });
 
-  if (bestMatch) {
-    return bestMatch.a;
-  }
-
-  return "I could not fully understand that. Please ask about courses, internships, fees, certificates, or contact support@freeliotech.in.";
+  if (best) return best.answer;
+  return "I'm not sure about that. Could you rephrase? You can ask about courses, internships, fees, certificates, or contact support@freeliotech.in.";
 };
 
 export default function FLTBot() {
@@ -228,18 +105,14 @@ export default function FLTBot() {
   const [msg, setMsg] = useState("");
   const [typing, setTyping] = useState(false);
   const [isListening, setIsListening] = useState(false);
-  const [voiceSupported, setVoiceSupported] = useState(false);
   const [speechEnabled, setSpeechEnabled] = useState(true);
+  const [voiceSupported, setVoiceSupported] = useState(false);
   const [chat, setChat] = useState(() => {
-    if (typeof window === "undefined") {
-      return [DEFAULT_MESSAGE];
-    }
-
+    if (typeof window === "undefined") return [DEFAULT_MESSAGE];
     try {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
+      const saved = localStorage.getItem(STORAGE_KEY);
       const parsed = saved ? JSON.parse(saved) : null;
-
-      return Array.isArray(parsed) && parsed.length ? parsed : [DEFAULT_MESSAGE];
+      return parsed && parsed.length ? parsed : [DEFAULT_MESSAGE];
     } catch {
       return [DEFAULT_MESSAGE];
     }
@@ -249,322 +122,251 @@ export default function FLTBot() {
   const inputRef = useRef(null);
   const recognitionRef = useRef(null);
 
-  const SpeechRecognition =
-    typeof window !== "undefined"
-      ? window.SpeechRecognition || window.webkitSpeechRecognition
-      : null;
+  const SpeechRecognition = typeof window !== "undefined"
+    ? window.SpeechRecognition || window.webkitSpeechRecognition
+    : null;
 
+  useEffect(() => setVoiceSupported(Boolean(SpeechRecognition)), []);
   useEffect(() => {
-    setVoiceSupported(Boolean(SpeechRecognition));
-  }, [SpeechRecognition]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(chat));
+    if (typeof window !== "undefined") localStorage.setItem(STORAGE_KEY, JSON.stringify(chat));
   }, [chat]);
-
   useEffect(() => {
-    const timer = window.setTimeout(() => {
-      chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 80);
-
-    return () => window.clearTimeout(timer);
+    setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
   }, [chat, typing]);
-
   useEffect(() => {
-    if (open) {
-      inputRef.current?.focus();
-    }
+    if (open) inputRef.current?.focus();
   }, [open]);
-
   useEffect(() => {
     return () => {
       recognitionRef.current?.stop?.();
-
-      if (typeof window !== "undefined" && window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-      }
+      if (typeof window !== "undefined" && window.speechSynthesis) window.speechSynthesis.cancel();
     };
   }, []);
 
-  const quickPrompts = useMemo(() => QUICK_ACTIONS, []);
-
   const speak = (text) => {
-    if (!speechEnabled || typeof window === "undefined" || !window.speechSynthesis) {
-      return;
-    }
-
+    if (!speechEnabled || typeof window === "undefined" || !window.speechSynthesis) return;
     window.speechSynthesis.cancel();
-
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.pitch = 1;
-    speech.rate = 1;
-    window.speechSynthesis.speak(speech);
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.pitch = 1;
+    utterance.rate = 1;
+    window.speechSynthesis.speak(utterance);
   };
 
-  const aiReply = async (input) => {
+  const getAIResponse = async (input) => {
     setTyping(true);
-    await new Promise((resolve) => window.setTimeout(resolve, 850));
-    const reply = getBestReply(input);
+    await new Promise((r) => setTimeout(r, 700));
+    const reply = getBotReply(input);
     setTyping(false);
     return reply;
   };
 
   const sendMessage = async (customText) => {
     const text = (customText ?? msg).trim();
-
-    if (!text || typing) {
-      return;
-    }
-
+    if (!text || typing) return;
     setMsg("");
     setChat((prev) => [...prev, createMessage("user", text)]);
-
-    const botText = await aiReply(text);
-    setChat((prev) => [...prev, createMessage("bot", botText)]);
-    speak(botText);
+    const botReply = await getAIResponse(text);
+    setChat((prev) => [...prev, createMessage("bot", botReply)]);
+    speak(botReply);
   };
 
   const clearChat = () => {
     setChat([DEFAULT_MESSAGE]);
-
-    if (typeof window !== "undefined") {
-      window.localStorage.removeItem(STORAGE_KEY);
-    }
+    if (typeof window !== "undefined") localStorage.removeItem(STORAGE_KEY);
   };
 
-  const startVoiceInput = () => {
-    if (!SpeechRecognition) {
-      window.alert("Voice input is not supported in this browser.");
-      return;
-    }
-
-    if (isListening) {
-      recognitionRef.current?.stop?.();
-      return;
-    }
-
+  const startVoice = () => {
+    if (!SpeechRecognition) return alert("Voice input not supported.");
+    if (isListening) return recognitionRef.current?.stop?.();
     const recognition = new SpeechRecognition();
     recognitionRef.current = recognition;
     recognition.lang = "en-US";
     recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
     recognition.onstart = () => setIsListening(true);
     recognition.onend = () => setIsListening(false);
     recognition.onerror = () => setIsListening(false);
-    recognition.onresult = (event) => {
-      const transcript = event.results?.[0]?.[0]?.transcript ?? "";
+    recognition.onresult = (e) => {
+      const transcript = e.results?.[0]?.[0]?.transcript || "";
       setMsg(transcript);
       inputRef.current?.focus();
     };
-
     recognition.start();
   };
 
-  const handleInputKeyDown = (event) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
+  const handleKey = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
       sendMessage();
     }
   };
 
   return (
     <>
+      {/* Robot Floating Button */}
       {!open && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.92, y: 20 }}
+          initial={{ opacity: 0, scale: 0.8, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          className="fixed bottom-5 right-5 z-[9999]"
+          exit={{ opacity: 0, scale: 0.8, y: 30 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          className="fixed bottom-5 right-5 z-[9999] cursor-pointer group"
+          onClick={() => setOpen(true)}
         >
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            className="group relative flex items-center gap-3 rounded-full border border-cyan-300/40 bg-slate-950/90 px-4 py-3 text-white shadow-[0_20px_60px_rgba(6,182,212,0.25)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-cyan-300/80"
-            aria-label="Open TTIC chat assistant"
-          >
-            <span className="absolute inset-0 rounded-full bg-cyan-400/20 blur-xl transition duration-300 group-hover:bg-cyan-300/30" />
-            <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-cyan-300 to-blue-500 text-slate-950">
-              <FaComments className="text-lg" />
+          <div className="relative">
+            {/* Pulsing ring */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 animate-ping opacity-30" />
+            <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500 shadow-2xl shadow-purple-500/40 transition-transform duration-300 group-hover:scale-110">
+              <FaRobot className="text-3xl text-white" />
+            </div>
+            <span className="absolute -top-1 -right-1 flex h-4 w-4">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex h-4 w-4 rounded-full bg-green-500"></span>
             </span>
-            <span className="relative hidden text-left sm:block">
-              <span className="block text-xs uppercase tracking-[0.28em] text-cyan-200/70">
-                TTIC Help Desk
-              </span>
-              <span className="block text-sm font-semibold text-white">
-                Chat with our assistant
-              </span>
-            </span>
-          </button>
+          </div>
         </motion.div>
       )}
 
+      {/* Chat Window */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 60, scale: 0.96 }}
+            initial={{ opacity: 0, y: 60, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 40, scale: 0.98 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-x-3 bottom-3 z-[9999] mx-auto flex max-h-[85vh] w-auto max-w-[420px] flex-col overflow-hidden rounded-[28px] border border-cyan-300/20 bg-slate-950/95 shadow-[0_28px_80px_rgba(15,23,42,0.75)] backdrop-blur-2xl sm:right-6 sm:left-auto sm:bottom-6 sm:w-[390px]"
+            exit={{ opacity: 0, y: 40, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 350, damping: 28 }}
+            className="fixed inset-x-3 bottom-3 z-[9999] mx-auto flex max-h-[85vh] w-auto max-w-[450px] flex-col overflow-hidden rounded-2xl bg-black/80 backdrop-blur-xl border border-purple-500/30 shadow-2xl shadow-purple-500/25 sm:right-6 sm:left-auto sm:bottom-6 sm:w-[420px]"
           >
-            <div className="relative overflow-hidden border-b border-cyan-300/15 bg-gradient-to-r from-cyan-500/20 via-sky-500/10 to-blue-500/20 p-4">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.18),transparent_30%)]" />
-              <div className="relative flex items-start justify-between gap-3">
+            {/* Header */}
+            <div className="relative border-b border-purple-500/30 bg-gradient-to-r from-purple-600/20 via-pink-600/15 to-cyan-600/20 p-4">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-300 to-blue-500 text-slate-950 shadow-lg shadow-cyan-500/20">
-                    <FaRobot className="text-xl" />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-lg">
+                    <FaRobot className="text-lg" />
                   </div>
                   <div>
-                    <h2 className="text-lg font-bold text-white">TTIC AI Assistant</h2>
-                    <p className="text-xs text-cyan-100/70">
-                      Online now | Courses | Internships | Support
-                    </p>
+                    <h2 className="text-lg font-bold text-white">TTIC Assistant</h2>
+                    <p className="text-xs text-purple-200/70">Powered by AI | Online 24/7</p>
                   </div>
                 </div>
-
-                <div className="flex items-center gap-2">
+                <div className="flex gap-2">
                   <button
-                    type="button"
-                    onClick={() => setSpeechEnabled((prev) => !prev)}
-                    className={`rounded-xl border px-3 py-2 text-xs font-medium transition ${
-                      speechEnabled
-                        ? "border-cyan-300/30 bg-cyan-300/15 text-cyan-100"
-                        : "border-white/10 bg-white/5 text-slate-300"
+                    onClick={() => setSpeechEnabled(!speechEnabled)}
+                    className={`rounded-lg border px-2 py-1.5 text-xs transition ${
+                      speechEnabled ? "bg-purple-500/20 border-purple-400/40 text-purple-200" : "bg-white/5 border-white/10 text-gray-400"
                     }`}
-                    aria-label={speechEnabled ? "Disable speech" : "Enable speech"}
+                    title={speechEnabled ? "Disable voice replies" : "Enable voice replies"}
                   >
                     <FaVolumeUp />
                   </button>
                   <button
-                    type="button"
-                    onClick={() => setOpen(false)}
-                    className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
-                    aria-label="Close chat"
+                    onClick={clearChat}
+                    className="rounded-lg border border-white/10 bg-white/5 px-2 py-1.5 text-xs text-gray-300 hover:bg-white/10"
+                    title="Clear chat"
                   >
-                    Close
+                    <FaTrash />
+                  </button>
+                  <button
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg border border-white/10 bg-white/5 px-2 py-1.5 text-sm text-gray-300 hover:bg-white/10"
+                  >
+                    <FaTimes />
                   </button>
                 </div>
               </div>
             </div>
 
-            <div className="border-b border-cyan-300/10 px-4 py-3">
-              <div className="mb-2 flex items-center justify-between gap-3">
-                <p className="text-xs uppercase tracking-[0.24em] text-cyan-100/45">
-                  Quick questions
-                </p>
-                <button
-                  type="button"
-                  onClick={clearChat}
-                  className="flex items-center gap-2 text-xs text-slate-400 transition hover:text-white"
-                >
-                  <FaTrash />
-                  Clear chat
-                </button>
-              </div>
-
+            {/* Quick Actions */}
+            <div className="border-b border-purple-500/20 px-4 py-3">
+              <p className="mb-2 text-xs uppercase tracking-wider text-purple-300/60">Quick questions</p>
               <div className="flex flex-wrap gap-2">
-                {quickPrompts.map((prompt) => (
+                {QUICK_ACTIONS.map((action) => (
                   <button
-                    key={prompt}
-                    type="button"
-                    onClick={() => sendMessage(prompt)}
-                    className="rounded-full border border-cyan-300/15 bg-white/5 px-3 py-1.5 text-sm text-slate-200 transition hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-white"
+                    key={action.label}
+                    onClick={() => sendMessage(action.label)}
+                    className="flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-white/5 px-3 py-1.5 text-sm text-gray-200 transition hover:bg-purple-500/20 hover:border-purple-400/50"
                   >
-                    {prompt}
+                    {action.icon} {action.label}
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="flex-1 space-y-4 overflow-y-auto bg-[linear-gradient(180deg,rgba(8,47,73,0.12),rgba(2,6,23,0))] px-4 py-4">
-              {chat.map((entry) => (
+            {/* Messages */}
+            <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4 scrollbar-thin scrollbar-thumb-purple-500/20">
+              {chat.map((msgItem) => (
                 <motion.div
-                  key={entry.id}
-                  initial={{ opacity: 0, y: 16 }}
+                  key={msgItem.id}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`flex ${entry.from === "user" ? "justify-end" : "justify-start"}`}
+                  transition={{ duration: 0.2 }}
+                  className={`flex ${msgItem.from === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-lg ${
-                      entry.from === "user"
-                        ? "rounded-br-md bg-gradient-to-r from-cyan-300 to-sky-400 text-slate-950"
-                        : "rounded-bl-md border border-cyan-300/10 bg-slate-900/80 text-slate-100"
+                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 shadow-md ${
+                      msgItem.from === "user"
+                        ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-br-sm"
+                        : "bg-white/10 border border-purple-500/20 text-gray-100 rounded-bl-sm"
                     }`}
                   >
-                    <p className="whitespace-pre-wrap text-sm leading-6">{entry.text}</p>
-                    <p
-                      className={`mt-2 text-[11px] ${
-                        entry.from === "user" ? "text-slate-800/70" : "text-slate-400"
-                      }`}
-                    >
-                      {entry.time}
+                    <p className="text-sm leading-relaxed whitespace-pre-wrap">{msgItem.text}</p>
+                    <p className={`mt-1 text-[10px] ${msgItem.from === "user" ? "text-purple-200/70" : "text-gray-400"}`}>
+                      {msgItem.time}
                     </p>
                   </div>
                 </motion.div>
               ))}
-
               {typing && (
                 <div className="flex justify-start">
-                  <div className="rounded-2xl rounded-bl-md border border-cyan-300/10 bg-slate-900/80 px-4 py-3 text-slate-300 shadow-lg">
-                    <div className="flex items-center gap-1">
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-cyan-300 [animation-delay:-0.2s]" />
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-cyan-300 [animation-delay:-0.1s]" />
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-cyan-300" />
+                  <div className="bg-white/10 border border-purple-500/20 rounded-2xl rounded-bl-sm px-4 py-2.5">
+                    <div className="flex gap-1">
+                      <span className="h-2 w-2 rounded-full bg-purple-400 animate-bounce [animation-delay:-0.3s]" />
+                      <span className="h-2 w-2 rounded-full bg-purple-400 animate-bounce [animation-delay:-0.15s]" />
+                      <span className="h-2 w-2 rounded-full bg-purple-400 animate-bounce" />
                     </div>
                   </div>
                 </div>
               )}
-
               <div ref={chatEndRef} />
             </div>
 
-            <div className="border-t border-cyan-300/10 bg-slate-950/90 p-4">
-              <div className="mb-2 flex items-center justify-between text-xs text-slate-400">
-                <span>{voiceSupported ? "Voice input ready" : "Voice input unavailable"}</span>
-                <span>{isListening ? "Listening..." : "Press Enter to send"}</span>
-              </div>
-
-              <div className="flex items-end gap-2">
+            {/* Input Area */}
+            <div className="border-t border-purple-500/20 bg-black/50 p-4">
+              <div className="flex items-center gap-2">
                 <button
-                  type="button"
-                  onClick={startVoiceInput}
+                  onClick={startVoice}
                   disabled={!voiceSupported}
-                  className={`flex h-12 w-12 items-center justify-center rounded-2xl text-white transition ${
+                  className={`flex h-10 w-10 items-center justify-center rounded-xl transition ${
                     voiceSupported
                       ? isListening
-                        ? "bg-rose-500 hover:bg-rose-400"
-                        : "bg-sky-600 hover:bg-sky-500"
-                      : "cursor-not-allowed bg-slate-800 text-slate-500"
+                        ? "bg-red-500/80 text-white"
+                        : "bg-purple-600/60 text-white hover:bg-purple-500"
+                      : "bg-gray-800 text-gray-500 cursor-not-allowed"
                   }`}
-                  aria-label="Start voice input"
+                  title={voiceSupported ? "Voice input" : "Voice not supported"}
                 >
                   <FaMicrophone />
                 </button>
-
-                <div className="flex-1 rounded-2xl border border-cyan-300/15 bg-white/[0.04] px-3 py-2 focus-within:border-cyan-300/40">
+                <div className="flex-1 rounded-xl border border-purple-500/30 bg-white/5 px-3 py-2 focus-within:border-purple-400">
                   <input
                     ref={inputRef}
                     value={msg}
-                    onChange={(event) => setMsg(event.target.value)}
-                    onKeyDown={handleInputKeyDown}
-                    placeholder="Ask about courses, internships, fees, certificates..."
-                    className="w-full bg-transparent text-sm text-white outline-none placeholder:text-slate-500"
+                    onChange={(e) => setMsg(e.target.value)}
+                    onKeyDown={handleKey}
+                    placeholder="Ask about courses, internships, fees..."
+                    className="w-full bg-transparent text-sm text-white outline-none placeholder:text-gray-400"
                   />
                 </div>
-
                 <button
-                  type="button"
                   onClick={() => sendMessage()}
                   disabled={!msg.trim() || typing}
-                  className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-300 text-slate-950 transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
-                  aria-label="Send message"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg hover:scale-105 transition disabled:opacity-50 disabled:scale-100"
                 >
                   <FaPaperPlane />
                 </button>
+              </div>
+              <div className="mt-2 flex justify-between text-[10px] text-gray-400">
+                <span>{voiceSupported ? (isListening ? "🎙️ Listening..." : "🎤 Voice ready") : "Voice unavailable"}</span>
+                <span>Press Enter ↵ to send</span>
               </div>
             </div>
           </motion.div>

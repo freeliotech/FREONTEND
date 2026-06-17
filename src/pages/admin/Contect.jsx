@@ -23,7 +23,7 @@ export default function ManageContact() {
   };
 
   return (
-    <div className="p-6 bg-black min-h-screen text-white">
+    <div className="p-6 py-30 bg-black min-h-screen text-white">
       <h1 className="text-3xl font-bold text-cyan-400 mb-6">
         📩 Manage Contacts
       </h1>

@@ -50,7 +50,7 @@ export default function Contact({ user }) {
 
     try {
       const res = await axios.post(
-        "https://backend-production-7a212.up.railway.app/api/contact",
+        "https://sanujbackendttic.up.railway.app/api/contact",
         form
       );
 

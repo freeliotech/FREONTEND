@@ -45,7 +45,8 @@ import Gallerymanage from "./pages/admin/Gallery";
 import SlideManage from "./pages/admin/Slide";
 import ContactManage from "./pages/admin/Contect";
 import CollegeManage from "./pages/admin/Colleges";
-
+import { useEffect, useState } from "react";
+import SplashScreen from "./components/SplashScreen";
 import Service from "./pages/admin/ManageServices";
 import IDCardGenerator from "./pages/admin/IDCardGenerator";
 import BeuNotis from "./pages/admin/AdminNotices";
@@ -78,8 +79,22 @@ import PaymentSuccess from "./Pyment/PaymentSuccess";
 import PaymentFailed from "./Pyment/PaymentFailed";
 import KrishiRent from "./pages/krishi/KrishiRent";
 function App() {
+    const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // 3 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <SplashScreen />;
+  }
 return ( 
 <Router>
+  
    <Background /> 
    <div className="relative z-10"> 
     <CustomCursor /> 
@@ -123,13 +138,26 @@ return (
 
       {/* ===== STUDENT ===== */}
       <Route
-        path="/student-dashboard"
+        path="/my-profile"
         element={
           <Student>
             <StudentDashboard />
           </Student>
         }
       />
+
+       <Route
+        path="/settings/edit-profile"
+        element={
+          <Student>
+            <StudentDashboard />
+          </Student>
+        }
+      />
+
+
+
+      
 
       {/* ===== ADMIN ===== */}
       <Route

@@ -26,8 +26,8 @@ const items = [
   { to: "/admin/courses", title: "Courses", icon: FaBook },
   { to: "/admin/syllabus", title: "Syllabus", icon: MdLibraryBooks },
 
-  { to: "/admin/internship", title: "Internship Forms", icon: FaWpforms },
-  { to: "/admin/internships", title: "Internship Data", icon: FaLayerGroup },
+  { to: "/admin/internship", title: "Internship Branch", icon: FaWpforms },
+  { to: "/admin/internships", title: "Internship Users", icon: FaLayerGroup },
 
   { to: "/admin/contacts", title: "Contacts", icon: FaEnvelopeOpenText },
   { to: "/admin/notes", title: "Notes", icon: FaStickyNote },

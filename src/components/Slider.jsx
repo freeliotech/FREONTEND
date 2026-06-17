@@ -5,7 +5,7 @@ import { ApiContext } from "../config/Api";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import Sv1 from "../assets/in1.png";
-import Sv2 from "../assets/in3.jpg";
+import Sv2 from "../assets/in9.png";
 import Sv6 from "../assets/in6.png";
 import Sv7 from "../assets/in7.png";
 
@@ -87,7 +87,21 @@ export default function Hero() {
   const s = slides[currentSlide];
 
   return (
-    <section className="relative w-full min-h-[75vh] md:min-h-[90vh] overflow-hidden">
+   <section
+  className="
+    relative
+    w-full
+
+    h-[30vh]
+    sm:h-[40vh]
+    md:min-h-[80vh]
+
+    overflow-hidden
+
+    mt-16
+    md:mt-22
+  "
+>
 
       {/* BACKGROUND */}
       <AnimatePresence mode="wait">

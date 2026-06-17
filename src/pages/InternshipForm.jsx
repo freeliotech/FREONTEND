@@ -3,7 +3,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const API = "https://backendttichub-production.up.railway.app/api";
+const API = "https://sanujbackendttic.up.railway.app/api";
 
 export default function ApplyInternship() {
 
@@ -74,7 +74,7 @@ export default function ApplyInternship() {
 
   return (
 
-    <section className="min-h-screen bg-[#030712] text-white flex justify-center items-center px-4 py-20">
+    <section className="min-h-screen bg-[#030619] text-white flex justify-center items-center px-4 py-20">
 
       <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-cyan-500 blur-[200px] opacity-20"></div>
       <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-purple-600 blur-[230px] opacity-20"></div>

@@ -1,83 +1,113 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { FaReact, FaPython, FaJava, FaJs } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FaReact,
+  FaNodeJs,
+  FaPython,
+  FaJava,
+  FaDatabase,
+  FaRobot,
+  FaCloud,
+  FaGitAlt,
+  FaMicrochip,
+  FaProjectDiagram,
+  FaCogs,
+  FaTools,
+} from "react-icons/fa";
+import { SiMongodb, SiTensorflow, SiDocker } from "react-icons/si";
 
-export default function Internship_Form() {
+const slides = [
+  {
+    title: "Full Stack",
+    highlight: "Web Development",
+    desc: "MERN stack with real-world projects, APIs, authentication, and deployment to build powerful, scalable web applications and skills.",
+    image: "https://www.varianceinfotech.com/assets/front/images/hire-mern-stack-developers/hire-mern-stack-banner-image.png",
+    skills: [FaReact, FaNodeJs, SiMongodb, SiDocker],
+  },
+  {
+    title: "Artificial Intelligence",
+    highlight: "Machine Learning",
+    desc: "Artificial Intelligence and Machine Learning: work on AI models using Python and real-world data, driving innovation and practical solutions.",
+    image: "https://cdn3d.iconscout.com/3d/premium/thumb/ai-data-statistics-3d-icon-png-download-6516826.png",
+    skills: [FaPython, SiTensorflow, FaRobot, FaDatabase],
+  },
+  {
+    title: "VLSI",
+    highlight: "Very Large Scale Integration Design & Verification",
+    desc: "Learn VLSI design fundamentals including digital circuits, Verilog HDL, ASIC flow, and chip design with real-world projects.",
+    image: "https://i0.wp.com/saventech.com/wp-content/uploads/2025/03/VLSI-Talent-Outsourcing.png?fit=800%2C539&ssl=1",
+    skills: [FaMicrochip, FaProjectDiagram, FaCogs, FaTools],
+  },
+];
+
+export default function SimpleBlackSlider() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setIndex((p) => (p + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(t);
+  }, []);
+
+  const current = slides[index];
+
   return (
-    <section className="relative min-h-screen bg-[#04070d] text-white overflow-hidden pt-24 pb-16">
-
-      {/* Glow Background */}
-
-      <div className="absolute -top-20 -left-20 w-[350px] h-[350px] bg-cyan-500/20 blur-[160px] rounded-full" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple-500/20 blur-[180px] rounded-full" />
-
-      {/* Rotating Icons */}
-
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-        className="absolute top-20 left-10 text-cyan-400 text-5xl opacity-70"
-      >
-        <FaReact />
-      </motion.div>
-
-      <motion.div
-        animate={{ rotate: -360 }}
-        transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-32 left-20 text-yellow-400 text-4xl opacity-70"
-      >
-        <FaPython />
-      </motion.div>
-
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute top-40 right-20 text-red-400 text-5xl opacity-70"
-      >
-        <FaJava />
-      </motion.div>
-
-      <motion.div
-        animate={{ rotate: -360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-20 right-16 text-yellow-300 text-4xl opacity-70"
-      >
-        <FaJs />
-      </motion.div>
-
-      {/* Content */}
-
-      <div className="relative z-10 max-w-5xl mx-auto px-6">
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center text-3xl md:text-4xl font-bold
-          bg-gradient-to-r from-cyan-400 via-purple-400 to-yellow-300
-          bg-clip-text text-transparent"
-        >
-          Internship Application Form
-        </motion.h1>
-
-        <p className="text-gray-400 text-center mt-3 mb-10">
-          Fill out the form carefully. Our team will review your application.
-        </p>
-
-        {/* Form Card */}
-
+    <section className="w-full bg-[#1e2a3a] text-white overflow-hidden relative pt-24 md:pt-28 pb-16">
+      <AnimatePresence mode="wait">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden"
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full flex items-center min-h-[50vh]"
         >
-          <iframe
-            src="https://forms.gle/FeTF74TgepKW3ifQ8"
-            title="Internship Form"
-            className="w-full h-[80vh] border-0"
-          />
+          <div className="w-full max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+            {/* LEFT CONTENT */}
+            <div className="space-y-6">
+              <h1 className="text-3xl md:text-6xl font-bold leading-tight">
+                {current.title}
+                <span className="block text-gray-400">{current.highlight}</span>
+              </h1>
+              <p className="text-gray-500 text-sm md:text-lg max-w-md">{current.desc}</p>
+              {/* SKILLS */}
+              <div className="flex gap-4 flex-wrap">
+                {current.skills.map((Icon, i) => (
+                  <div
+                    key={i}
+                    className="w-10 h-10 flex items-center justify-center bg-[#111] border border-gray-800 rounded-lg text-gray-300"
+                  >
+                    <Icon />
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* RIGHT IMAGE */}
+            <div className="flex justify-center md:justify-end relative">
+              <motion.img
+                src={current.image}
+                alt="slide"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                className="w-[260px] md:w-[420px] object-contain"
+              />
+              <div className="absolute w-72 h-72 bg-gray-800/40 blur-3xl rounded-full" />
+            </div>
+          </div>
         </motion.div>
+      </AnimatePresence>
+      {/* DOT INDICATOR */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+        {slides.map((_, i) => (
+          <div
+            key={i}
+            className={`w-2 h-2 rounded-full transition ${
+              i === index ? "bg-white" : "bg-gray-600"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );

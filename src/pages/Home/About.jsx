@@ -11,7 +11,7 @@ const ABOUT_IMAGE =
 
 export default function AboutUsSection() {
   return (
-    <section className="relative py-28 px-6 overflow-hidden text-white font-Poppins">
+    <section className="relative py-2 px-2 overflow-hidden text-white font-Poppins">
 
       {/* BACKGROUND GLOW */}
 
