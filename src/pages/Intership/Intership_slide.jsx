@@ -33,7 +33,7 @@ const slides = [
   },
   {
    
-  tile: "VLSI",
+  title: "VLSI",
   highlight: " Very Large Scale IntegrationDesign & Verification",
   desc: "Learn VLSI design fundamentals including digital circuits, Verilog HDL, ASIC flow, and chip design with real-world projects.",
   image: "https://i0.wp.com/saventech.com/wp-content/uploads/2025/03/VLSI-Talent-Outsourcing.png?fit=800%2C539&ssl=1",
