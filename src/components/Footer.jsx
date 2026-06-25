@@ -269,7 +269,7 @@ export default function Footer() {
   
   const contactItems = useMemo(() => [
     { icon: FaMapMarkerAlt, text: "Patna, Bihar, India", label: "Visit Us" },
-    { icon: FaWhatsapp, text: "+91 8292928328", label: "WhatsApp" },
+    { icon: FaWhatsapp, text: "+91 97085 09504", label: "WhatsApp" },
     { icon: FaEnvelope, text: "admin@ttichub.co.in", label: "Email Us" },
     { icon: FaClock, text: "Mon-Sat: 10AM - 6PM", label: "Working Hours" },
   ], []);
