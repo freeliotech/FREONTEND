@@ -207,25 +207,7 @@ export default function AboutPage() {
       linkedin: "https://linkedin.com/in/vinay",
       instagram: "https://instagram.com/vinay",
       facebook: "https://facebook.com/vinay",
-    },
-    {
-      name: "Priya Sharma",
-      role: "Co-Founder & CTO",
-      message: "Practical, project-based learning bridges the gap between academics and real-world demands.",
-      image: "https://randomuser.me/api/portraits/women/68.jpg",
-      linkedin: "https://linkedin.com/in/priya",
-      instagram: "https://instagram.com/priya",
-      facebook: "https://facebook.com/priya",
-    },
-    {
-      name: "Amit Singh",
-      role: "Co-Founder & Head of Operations",
-      message: "Building a supportive ecosystem where every learner gets personalized guidance.",
-      image: "https://randomuser.me/api/portraits/men/45.jpg",
-      linkedin: "https://linkedin.com/in/amit",
-      instagram: "https://instagram.com/amit",
-      facebook: "https://facebook.com/amit",
-    },
+    }
   ];
 
   const features = [
