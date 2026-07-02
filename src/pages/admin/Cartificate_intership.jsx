@@ -8,7 +8,7 @@ import {
   Users, Award, Clock, BarChart3, FileCheck
 } from "lucide-react";
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://sanujbackendttic.up.railway.app/api";
 
 export default function CertificateInternship() {
   const [certificates, setCertificates] = useState([]);
